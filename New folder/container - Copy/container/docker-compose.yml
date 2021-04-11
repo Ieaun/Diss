@@ -1,0 +1,17 @@
+﻿version: "3.8"
+services: 
+    container:
+       build:
+         context: .
+         dockerfile: Debug.Dockerfile
+       ports:
+        - 30000:30000   
+       networks:
+        - lora
+       container_name: container
+       environment:
+        - ASPNETCORE_ENVIRONMENT=Test
+
+networks:
+  lora:
+    name: lora

@@ -1,0 +1,18 @@
+﻿version: "3.8"
+services: 
+    queue:
+       build: .
+       hostname: queue
+       ports:
+        - 34002:15672 
+        - 34001:5672  
+       networks:
+        - lora
+       container_name: queue
+       volumes:
+        - ./rabbitmq.config:/etc/rabbitmq/rabbitmq.config:ro
+        - ./definitions.json:/etc/rabbitmq/definitions.json:ro
+
+networks:
+  lora:
+    name: lora

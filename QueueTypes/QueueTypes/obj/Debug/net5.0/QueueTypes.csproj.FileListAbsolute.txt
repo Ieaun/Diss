@@ -1,0 +1,11 @@
+C:\Users\ieaun\Desktop\MSc_Diss\QueueTypes\QueueTypes\bin\Debug\net5.0\QueueTypes.deps.json
+C:\Users\ieaun\Desktop\MSc_Diss\QueueTypes\QueueTypes\bin\Debug\net5.0\QueueTypes.dll
+C:\Users\ieaun\Desktop\MSc_Diss\QueueTypes\QueueTypes\bin\Debug\net5.0\ref\QueueTypes.dll
+C:\Users\ieaun\Desktop\MSc_Diss\QueueTypes\QueueTypes\bin\Debug\net5.0\QueueTypes.pdb
+C:\Users\ieaun\Desktop\MSc_Diss\QueueTypes\QueueTypes\obj\Debug\net5.0\QueueTypes.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ieaun\Desktop\MSc_Diss\QueueTypes\QueueTypes\obj\Debug\net5.0\QueueTypes.AssemblyInfoInputs.cache
+C:\Users\ieaun\Desktop\MSc_Diss\QueueTypes\QueueTypes\obj\Debug\net5.0\QueueTypes.AssemblyInfo.cs
+C:\Users\ieaun\Desktop\MSc_Diss\QueueTypes\QueueTypes\obj\Debug\net5.0\QueueTypes.csproj.CoreCompileInputs.cache
+C:\Users\ieaun\Desktop\MSc_Diss\QueueTypes\QueueTypes\obj\Debug\net5.0\QueueTypes.dll
+C:\Users\ieaun\Desktop\MSc_Diss\QueueTypes\QueueTypes\obj\Debug\net5.0\ref\QueueTypes.dll
+C:\Users\ieaun\Desktop\MSc_Diss\QueueTypes\QueueTypes\obj\Debug\net5.0\QueueTypes.pdb

@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "LhdVZINWPDME4IOnr6wpODRQVV12psLWcC5nzwxDhowpem+daumCQVA/wB18DwKG2ZGgPNRGbb7SNq7OyVxsYg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\ieaun\\Desktop\\MSc_Diss\\QueueTypes\\QueueTypes\\QueueTypes.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ieaun\\.nuget\\packages\\easynetq\\6.3.1\\easynetq.6.3.1.nupkg.sha512",
+    "C:\\Users\\ieaun\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
+    "C:\\Users\\ieaun\\.nuget\\packages\\rabbitmq.client\\6.2.1\\rabbitmq.client.6.2.1.nupkg.sha512",
+    "C:\\Users\\ieaun\\.nuget\\packages\\system.memory\\4.5.4\\system.memory.4.5.4.nupkg.sha512",
+    "C:\\Users\\ieaun\\.nuget\\packages\\system.threading.channels\\4.7.1\\system.threading.channels.4.7.1.nupkg.sha512"
+  ],
+  "logs": []
+}

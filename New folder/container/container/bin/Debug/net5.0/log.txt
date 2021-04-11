@@ -1,0 +1,254 @@
+2021-04-08 16:12:51.519 +01:00 [INF] Starting container
+2021-04-08 16:12:52.625 +01:00 [INF] Fatal shutdown
+2021-04-08 16:12:52.625 +01:00 [INF] Graceful shutdown
+2021-04-08 16:13:49.465 +01:00 [INF] Starting container
+2021-04-08 16:13:49.679 +01:00 [INF] Fatal shutdown
+2021-04-08 16:13:49.679 +01:00 [INF] Graceful shutdown
+2021-04-08 16:14:18.194 +01:00 [INF] Starting container
+2021-04-08 16:14:18.381 +01:00 [INF] Fatal shutdown
+2021-04-08 16:14:33.765 +01:00 [INF] Starting container
+2021-04-08 16:14:33.959 +01:00 [INF] Fatal shutdown
+2021-04-08 16:16:11.573 +01:00 [INF] Starting container
+2021-04-08 16:16:54.265 +01:00 [INF] Starting container
+2021-04-08 16:18:19.163 +01:00 [INF] Fatal shutdown
+2021-04-08 16:19:57.982 +01:00 [INF] Starting container
+2021-04-08 16:20:08.345 +01:00 [INF] Fatal shutdown
+2021-04-08 16:25:37.164 +01:00 [INF] Starting container
+2021-04-08 16:26:06.249 +01:00 [INF] Starting container
+2021-04-08 16:27:13.613 +01:00 [INF] Graceful shutdown
+2021-04-08 16:27:24.356 +01:00 [INF] Starting container
+2021-04-08 16:29:02.470 +01:00 [INF] Graceful shutdown
+2021-04-08 16:29:08.232 +01:00 [INF] Starting container
+2021-04-08 16:29:25.121 +01:00 [INF] Graceful shutdown
+2021-04-08 16:48:59.286 +01:00 [INF] Starting container
+2021-04-08 16:49:23.474 +01:00 [INF] Graceful shutdown
+2021-04-08 16:49:27.873 +01:00 [INF] Starting container
+2021-04-08 17:00:47.536 +01:00 [INF] Starting container
+2021-04-08 17:00:50.276 +01:00 [INF] Starting container
+2021-04-08 17:00:50.587 +01:00 [INF] Fatal shutdown
+2021-04-08 17:00:59.575 +01:00 [INF] Starting container
+2021-04-08 17:00:59.846 +01:00 [INF] Fatal shutdown
+2021-04-09 11:52:02.633 +01:00 [INF] Starting container
+2021-04-09 11:56:33.175 +01:00 [INF] Starting container
+2021-04-09 11:56:34.032 +01:00 [INF] Fatal shutdown
+2021-04-09 11:57:04.559 +01:00 [INF] Starting container
+2021-04-09 11:57:05.485 +01:00 [INF] Fatal shutdown
+2021-04-09 11:57:23.667 +01:00 [INF] Starting container
+2021-04-09 11:59:51.023 +01:00 [INF] Starting container
+2021-04-09 12:00:50.603 +01:00 [INF] Starting container
+2021-04-09 12:03:40.291 +01:00 [INF] Starting container
+2021-04-09 12:04:07.190 +01:00 [INF] Starting container
+2021-04-09 12:09:13.714 +01:00 [INF] Starting container
+2021-04-09 12:09:53.985 +01:00 [INF] Starting container
+2021-04-09 12:10:19.031 +01:00 [INF] Starting container
+2021-04-09 12:11:18.127 +01:00 [INF] Starting container
+2021-04-09 12:11:33.162 +01:00 [INF] Starting container
+2021-04-09 12:12:24.980 +01:00 [INF] Starting container
+2021-04-09 12:12:40.958 +01:00 [INF] Starting container
+2021-04-09 12:13:14.546 +01:00 [INF] Starting container
+2021-04-09 12:15:29.100 +01:00 [INF] Starting container
+2021-04-09 12:17:19.886 +01:00 [INF] Starting container
+2021-04-09 12:30:40.832 +01:00 [INF] Starting container
+2021-04-09 12:32:40.522 +01:00 [INF] Starting container
+2021-04-09 12:33:31.822 +01:00 [INF] Starting container
+2021-04-09 12:34:00.005 +01:00 [INF] Starting container
+2021-04-09 12:35:09.039 +01:00 [INF] Starting container
+2021-04-09 12:35:28.162 +01:00 [INF] Starting container
+2021-04-09 12:35:29.602 +01:00 [DBG] Config: AllowedHosts=* (JsonConfigurationProvider for 'appsettings.json' (Optional))
+ALLUSERSPROFILE=C:\ProgramData (EnvironmentVariablesConfigurationProvider)
+ANCM_LAUNCHER_PATH=C:\Users\ieaun\Desktop\Diss Containers\container\container\bin\Debug\net5.0\container.exe (EnvironmentVariablesConfigurationProvider)
+ANCM_PREFER_ENVIRONMENT_VARIABLES=true (EnvironmentVariablesConfigurationProvider)
+APPDATA=C:\Users\ieaun\AppData\Roaming (EnvironmentVariablesConfigurationProvider)
+applicationName=container (Microsoft.Extensions.Configuration.ChainedConfigurationProvider)
+APP_POOL_CONFIG=C:\Users\ieaun\Desktop\Diss Containers\container\.vs\container\config\applicationhost.config (EnvironmentVariablesConfigurationProvider)
+APP_POOL_ID=container AppPool (EnvironmentVariablesConfigurationProvider)
+ASPNETCORE_ENVIRONMENT=Development (EnvironmentVariablesConfigurationProvider)
+ASPNETCORE_IIS_HTTPAUTH=anonymous; (EnvironmentVariablesConfigurationProvider)
+ASPNETCORE_IIS_PHYSICAL_PATH=C:\Users\ieaun\Desktop\Diss Containers\container\container\ (EnvironmentVariablesConfigurationProvider)
+CommonProgramFiles=C:\Program Files\Common Files (EnvironmentVariablesConfigurationProvider)
+CommonProgramFiles(x86)=C:\Program Files (x86)\Common Files (EnvironmentVariablesConfigurationProvider)
+CommonProgramW6432=C:\Program Files\Common Files (EnvironmentVariablesConfigurationProvider)
+COMPLUS_ForceENC=1 (EnvironmentVariablesConfigurationProvider)
+COMPLUS_InstallRoot= (EnvironmentVariablesConfigurationProvider)
+COMPLUS_MDA=managedDebugger (EnvironmentVariablesConfigurationProvider)
+COMPLUS_Version= (EnvironmentVariablesConfigurationProvider)
+COMPUTERNAME=DESKTOP-N9V9S6V (EnvironmentVariablesConfigurationProvider)
+ComSpec=C:\Windows\system32\cmd.exe (EnvironmentVariablesConfigurationProvider)
+ConnectionStrings:
+  Queue=host=localhost:30001 (JsonConfigurationProvider for 'appsettings.json' (Optional))
+contentRoot=C:\Users\ieaun\Desktop\Diss Containers\container\container (Microsoft.Extensions.Configuration.ChainedConfigurationProvider)
+DEV_ENVIRONMENT=1 (EnvironmentVariablesConfigurationProvider)
+DriverData=C:\Windows\System32\Drivers\DriverData (EnvironmentVariablesConfigurationProvider)
+ENVIRONMENT=Development (Microsoft.Extensions.Configuration.ChainedConfigurationProvider)
+ERLANG_HOME=C:\Program Files\erl-23.3 (EnvironmentVariablesConfigurationProvider)
+FACADES_4.5.0.0=C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\Facades (EnvironmentVariablesConfigurationProvider)
+FACADES_4.5.1.0=C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.1\Facades (EnvironmentVariablesConfigurationProvider)
+FACADES_4.5.2.0=C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\Facades (EnvironmentVariablesConfigurationProvider)
+FACADES_4.6.0.0=C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades (EnvironmentVariablesConfigurationProvider)
+FACADES_4.6.1.0=C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\Facades (EnvironmentVariablesConfigurationProvider)
+FACADES_4.7.2.0=C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\Facades (EnvironmentVariablesConfigurationProvider)
+ForceIdentityAuthenticationType=Embedded (EnvironmentVariablesConfigurationProvider)
+FPS_BROWSER_APP_PROFILE_STRING=Internet Explorer (EnvironmentVariablesConfigurationProvider)
+FPS_BROWSER_USER_PROFILE_STRING=Default (EnvironmentVariablesConfigurationProvider)
+HOMEDRIVE=C: (EnvironmentVariablesConfigurationProvider)
+HOMEPATH=\Users\ieaun (EnvironmentVariablesConfigurationProvider)
+IISEXPRESS_SITENAME=container (EnvironmentVariablesConfigurationProvider)
+IIS_BIN=C:\Program Files\IIS Express (EnvironmentVariablesConfigurationProvider)
+IIS_DRIVE=C: (EnvironmentVariablesConfigurationProvider)
+IIS_HTTPAUTH=anonymous; (Microsoft.Extensions.Configuration.ChainedConfigurationProvider)
+IIS_PHYSICAL_PATH=C:\Users\ieaun\Desktop\Diss Containers\container\container\ (Microsoft.Extensions.Configuration.ChainedConfigurationProvider)
+IIS_SITES_HOME=C:\Users\ieaun\Documents\My Web Sites (EnvironmentVariablesConfigurationProvider)
+IIS_USER_HOME=C:\Users\ieaun\Documents\IISExpress (EnvironmentVariablesConfigurationProvider)
+Kestrel:
+  EndPoints:
+    Http:
+      Url=http:127.0.0.1:30000 (JsonConfigurationProvider for 'appsettings.json' (Optional))
+LOCALAPPDATA=C:\Users\ieaun\AppData\Local (EnvironmentVariablesConfigurationProvider)
+Logging:
+  LogLevel:
+    Default=Information (JsonConfigurationProvider for 'appsettings.Development.json' (Optional))
+    Microsoft=Warning (JsonConfigurationProvider for 'appsettings.Development.json' (Optional))
+    Microsoft.Hosting.Lifetime=Information (JsonConfigurationProvider for 'appsettings.Development.json' (Optional))
+LOGONSERVER=\\DESKTOP-N9V9S6V (EnvironmentVariablesConfigurationProvider)
+MSBuildLoadMicrosoftTargetsReadOnly=true (EnvironmentVariablesConfigurationProvider)
+NUMBER_OF_PROCESSORS=8 (EnvironmentVariablesConfigurationProvider)
+OneDrive=C:\Users\ieaun\OneDrive (EnvironmentVariablesConfigurationProvider)
+OneDriveConsumer=C:\Users\ieaun\OneDrive (EnvironmentVariablesConfigurationProvider)
+OS=Windows_NT (EnvironmentVariablesConfigurationProvider)
+Path=C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files\PuTTY\;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Users\ieaun\AppData\Local\Microsoft\WindowsApps;;C:\Users\ieaun\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\ieaun\AppData\Roaming\npm;C:\Users\ieaun\.dotnet\tools (EnvironmentVariablesConfigurationProvider)
+PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC (EnvironmentVariablesConfigurationProvider)
+PkgDefApplicationConfigFile=C:\Users\ieaun\AppData\Local\Microsoft\VisualStudio\16.0_64e34b74\devenv.exe.config (EnvironmentVariablesConfigurationProvider)
+PROCESSOR_ARCHITECTURE=AMD64 (EnvironmentVariablesConfigurationProvider)
+PROCESSOR_IDENTIFIER=AMD64 Family 21 Model 2 Stepping 0, AuthenticAMD (EnvironmentVariablesConfigurationProvider)
+PROCESSOR_LEVEL=21 (EnvironmentVariablesConfigurationProvider)
+PROCESSOR_REVISION=0200 (EnvironmentVariablesConfigurationProvider)
+ProgramData=C:\ProgramData (EnvironmentVariablesConfigurationProvider)
+ProgramFiles=C:\Program Files (EnvironmentVariablesConfigurationProvider)
+ProgramFiles(x86)=C:\Program Files (x86) (EnvironmentVariablesConfigurationProvider)
+PROGRAMFILESDIR=C:\Program Files (x86)\ (EnvironmentVariablesConfigurationProvider)
+ProgramW6432=C:\Program Files (EnvironmentVariablesConfigurationProvider)
+PSModulePath=C:\Program Files\WindowsPowerShell\Modules;C:\Windows\system32\WindowsPowerShell\v1.0\Modules (EnvironmentVariablesConfigurationProvider)
+PUBLIC=C:\Users\Public (EnvironmentVariablesConfigurationProvider)
+ServiceHubLogSessionKey=4EDADD17 (EnvironmentVariablesConfigurationProvider)
+SESSIONNAME=Console (EnvironmentVariablesConfigurationProvider)
+SignInWithHomeTenantOnly=False (EnvironmentVariablesConfigurationProvider)
+SystemDrive=C: (EnvironmentVariablesConfigurationProvider)
+SystemRoot=C:\Windows (EnvironmentVariablesConfigurationProvider)
+TEMP=C:\Users\ieaun\AppData\Local\Temp (EnvironmentVariablesConfigurationProvider)
+ThreadedWaitDialogDpiContext=-4 (EnvironmentVariablesConfigurationProvider)
+TMP=C:\Users\ieaun\AppData\Local\Temp (EnvironmentVariablesConfigurationProvider)
+USERDOMAIN=DESKTOP-N9V9S6V (EnvironmentVariablesConfigurationProvider)
+USERDOMAIN_ROAMINGPROFILE=DESKTOP-N9V9S6V (EnvironmentVariablesConfigurationProvider)
+USERNAME=ieaun (EnvironmentVariablesConfigurationProvider)
+USERPROFILE=C:\Users\ieaun (EnvironmentVariablesConfigurationProvider)
+VisualStudioDir=C:\Users\ieaun\Documents\Visual Studio 2019 (EnvironmentVariablesConfigurationProvider)
+VisualStudioEdition=Microsoft Visual Studio Professional 2019 (EnvironmentVariablesConfigurationProvider)
+VisualStudioVersion=16.0 (EnvironmentVariablesConfigurationProvider)
+VSAPPIDDIR=C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\IDE\ (EnvironmentVariablesConfigurationProvider)
+VSAPPIDNAME=devenv.exe (EnvironmentVariablesConfigurationProvider)
+VSLANG=1033 (EnvironmentVariablesConfigurationProvider)
+VSSKUEDITION=Professional (EnvironmentVariablesConfigurationProvider)
+windir=C:\Windows (EnvironmentVariablesConfigurationProvider)
+
+2021-04-09 12:35:39.167 +01:00 [INF] Starting container
+2021-04-09 12:36:24.845 +01:00 [INF] Starting container
+2021-04-09 12:36:52.040 +01:00 [INF] Starting container
+2021-04-09 12:37:02.609 +01:00 [INF] Starting container
+2021-04-09 12:37:34.053 +01:00 [INF] Starting container
+2021-04-09 12:37:35.579 +01:00 [DBG] Config: AllowedHosts=* (JsonConfigurationProvider for 'appsettings.json' (Optional))
+ALLUSERSPROFILE=C:\ProgramData (EnvironmentVariablesConfigurationProvider)
+ANCM_LAUNCHER_PATH=C:\Users\ieaun\Desktop\Diss Containers\container\container\bin\Debug\net5.0\container.exe (EnvironmentVariablesConfigurationProvider)
+ANCM_PREFER_ENVIRONMENT_VARIABLES=true (EnvironmentVariablesConfigurationProvider)
+APPDATA=C:\Users\ieaun\AppData\Roaming (EnvironmentVariablesConfigurationProvider)
+applicationName=container (Microsoft.Extensions.Configuration.ChainedConfigurationProvider)
+APP_POOL_CONFIG=C:\Users\ieaun\Desktop\Diss Containers\container\.vs\container\config\applicationhost.config (EnvironmentVariablesConfigurationProvider)
+APP_POOL_ID=container AppPool (EnvironmentVariablesConfigurationProvider)
+ASPNETCORE_ENVIRONMENT=Development (EnvironmentVariablesConfigurationProvider)
+ASPNETCORE_IIS_HTTPAUTH=anonymous; (EnvironmentVariablesConfigurationProvider)
+ASPNETCORE_IIS_PHYSICAL_PATH=C:\Users\ieaun\Desktop\Diss Containers\container\container\ (EnvironmentVariablesConfigurationProvider)
+CommonProgramFiles=C:\Program Files\Common Files (EnvironmentVariablesConfigurationProvider)
+CommonProgramFiles(x86)=C:\Program Files (x86)\Common Files (EnvironmentVariablesConfigurationProvider)
+CommonProgramW6432=C:\Program Files\Common Files (EnvironmentVariablesConfigurationProvider)
+COMPLUS_ForceENC=1 (EnvironmentVariablesConfigurationProvider)
+COMPLUS_InstallRoot= (EnvironmentVariablesConfigurationProvider)
+COMPLUS_MDA=managedDebugger (EnvironmentVariablesConfigurationProvider)
+COMPLUS_Version= (EnvironmentVariablesConfigurationProvider)
+COMPUTERNAME=DESKTOP-N9V9S6V (EnvironmentVariablesConfigurationProvider)
+ComSpec=C:\Windows\system32\cmd.exe (EnvironmentVariablesConfigurationProvider)
+ConnectionStrings:
+  Queue=host=localhost:30001 (JsonConfigurationProvider for 'appsettings.json' (Optional))
+contentRoot=C:\Users\ieaun\Desktop\Diss Containers\container\container (Microsoft.Extensions.Configuration.ChainedConfigurationProvider)
+DEV_ENVIRONMENT=1 (EnvironmentVariablesConfigurationProvider)
+DriverData=C:\Windows\System32\Drivers\DriverData (EnvironmentVariablesConfigurationProvider)
+ENVIRONMENT=Development (Microsoft.Extensions.Configuration.ChainedConfigurationProvider)
+ERLANG_HOME=C:\Program Files\erl-23.3 (EnvironmentVariablesConfigurationProvider)
+FACADES_4.5.0.0=C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\Facades (EnvironmentVariablesConfigurationProvider)
+FACADES_4.5.1.0=C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.1\Facades (EnvironmentVariablesConfigurationProvider)
+FACADES_4.5.2.0=C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\Facades (EnvironmentVariablesConfigurationProvider)
+FACADES_4.6.0.0=C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\Facades (EnvironmentVariablesConfigurationProvider)
+FACADES_4.6.1.0=C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\Facades (EnvironmentVariablesConfigurationProvider)
+FACADES_4.7.2.0=C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\Facades (EnvironmentVariablesConfigurationProvider)
+ForceIdentityAuthenticationType=Embedded (EnvironmentVariablesConfigurationProvider)
+FPS_BROWSER_APP_PROFILE_STRING=Internet Explorer (EnvironmentVariablesConfigurationProvider)
+FPS_BROWSER_USER_PROFILE_STRING=Default (EnvironmentVariablesConfigurationProvider)
+HOMEDRIVE=C: (EnvironmentVariablesConfigurationProvider)
+HOMEPATH=\Users\ieaun (EnvironmentVariablesConfigurationProvider)
+IISEXPRESS_SITENAME=container (EnvironmentVariablesConfigurationProvider)
+IIS_BIN=C:\Program Files\IIS Express (EnvironmentVariablesConfigurationProvider)
+IIS_DRIVE=C: (EnvironmentVariablesConfigurationProvider)
+IIS_HTTPAUTH=anonymous; (Microsoft.Extensions.Configuration.ChainedConfigurationProvider)
+IIS_PHYSICAL_PATH=C:\Users\ieaun\Desktop\Diss Containers\container\container\ (Microsoft.Extensions.Configuration.ChainedConfigurationProvider)
+IIS_SITES_HOME=C:\Users\ieaun\Documents\My Web Sites (EnvironmentVariablesConfigurationProvider)
+IIS_USER_HOME=C:\Users\ieaun\Documents\IISExpress (EnvironmentVariablesConfigurationProvider)
+Kestrel:
+  EndPoints:
+    Http:
+      Url=http:localhost:30000 (JsonConfigurationProvider for 'appsettings.json' (Optional))
+LOCALAPPDATA=C:\Users\ieaun\AppData\Local (EnvironmentVariablesConfigurationProvider)
+Logging:
+  LogLevel:
+    Default=Information (JsonConfigurationProvider for 'appsettings.Development.json' (Optional))
+    Microsoft=Warning (JsonConfigurationProvider for 'appsettings.Development.json' (Optional))
+    Microsoft.Hosting.Lifetime=Information (JsonConfigurationProvider for 'appsettings.Development.json' (Optional))
+LOGONSERVER=\\DESKTOP-N9V9S6V (EnvironmentVariablesConfigurationProvider)
+MSBuildLoadMicrosoftTargetsReadOnly=true (EnvironmentVariablesConfigurationProvider)
+NUMBER_OF_PROCESSORS=8 (EnvironmentVariablesConfigurationProvider)
+OneDrive=C:\Users\ieaun\OneDrive (EnvironmentVariablesConfigurationProvider)
+OneDriveConsumer=C:\Users\ieaun\OneDrive (EnvironmentVariablesConfigurationProvider)
+OS=Windows_NT (EnvironmentVariablesConfigurationProvider)
+Path=C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files\PuTTY\;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Users\ieaun\AppData\Local\Microsoft\WindowsApps;;C:\Users\ieaun\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\ieaun\AppData\Roaming\npm;C:\Users\ieaun\.dotnet\tools (EnvironmentVariablesConfigurationProvider)
+PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC (EnvironmentVariablesConfigurationProvider)
+PkgDefApplicationConfigFile=C:\Users\ieaun\AppData\Local\Microsoft\VisualStudio\16.0_64e34b74\devenv.exe.config (EnvironmentVariablesConfigurationProvider)
+PROCESSOR_ARCHITECTURE=AMD64 (EnvironmentVariablesConfigurationProvider)
+PROCESSOR_IDENTIFIER=AMD64 Family 21 Model 2 Stepping 0, AuthenticAMD (EnvironmentVariablesConfigurationProvider)
+PROCESSOR_LEVEL=21 (EnvironmentVariablesConfigurationProvider)
+PROCESSOR_REVISION=0200 (EnvironmentVariablesConfigurationProvider)
+ProgramData=C:\ProgramData (EnvironmentVariablesConfigurationProvider)
+ProgramFiles=C:\Program Files (EnvironmentVariablesConfigurationProvider)
+ProgramFiles(x86)=C:\Program Files (x86) (EnvironmentVariablesConfigurationProvider)
+PROGRAMFILESDIR=C:\Program Files (x86)\ (EnvironmentVariablesConfigurationProvider)
+ProgramW6432=C:\Program Files (EnvironmentVariablesConfigurationProvider)
+PSModulePath=C:\Program Files\WindowsPowerShell\Modules;C:\Windows\system32\WindowsPowerShell\v1.0\Modules (EnvironmentVariablesConfigurationProvider)
+PUBLIC=C:\Users\Public (EnvironmentVariablesConfigurationProvider)
+ServiceHubLogSessionKey=4EDADD17 (EnvironmentVariablesConfigurationProvider)
+SESSIONNAME=Console (EnvironmentVariablesConfigurationProvider)
+SignInWithHomeTenantOnly=False (EnvironmentVariablesConfigurationProvider)
+SystemDrive=C: (EnvironmentVariablesConfigurationProvider)
+SystemRoot=C:\Windows (EnvironmentVariablesConfigurationProvider)
+TEMP=C:\Users\ieaun\AppData\Local\Temp (EnvironmentVariablesConfigurationProvider)
+ThreadedWaitDialogDpiContext=-4 (EnvironmentVariablesConfigurationProvider)
+TMP=C:\Users\ieaun\AppData\Local\Temp (EnvironmentVariablesConfigurationProvider)
+USERDOMAIN=DESKTOP-N9V9S6V (EnvironmentVariablesConfigurationProvider)
+USERDOMAIN_ROAMINGPROFILE=DESKTOP-N9V9S6V (EnvironmentVariablesConfigurationProvider)
+USERNAME=ieaun (EnvironmentVariablesConfigurationProvider)
+USERPROFILE=C:\Users\ieaun (EnvironmentVariablesConfigurationProvider)
+VisualStudioDir=C:\Users\ieaun\Documents\Visual Studio 2019 (EnvironmentVariablesConfigurationProvider)
+VisualStudioEdition=Microsoft Visual Studio Professional 2019 (EnvironmentVariablesConfigurationProvider)
+VisualStudioVersion=16.0 (EnvironmentVariablesConfigurationProvider)
+VSAPPIDDIR=C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\IDE\ (EnvironmentVariablesConfigurationProvider)
+VSAPPIDNAME=devenv.exe (EnvironmentVariablesConfigurationProvider)
+VSLANG=1033 (EnvironmentVariablesConfigurationProvider)
+VSSKUEDITION=Professional (EnvironmentVariablesConfigurationProvider)
+windir=C:\Windows (EnvironmentVariablesConfigurationProvider)
+
+2021-04-09 12:37:52.940 +01:00 [INF] Starting container
