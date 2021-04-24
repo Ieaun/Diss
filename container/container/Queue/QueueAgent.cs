@@ -20,7 +20,6 @@
             this._logger = logger;
             this._bus = bus;
 
-
             //this WILL throw an error if rabbit mq is not running. Rabbit mq must be running. 
             this._bus.PubSub.Subscribe<QueueTypes.Queues.Downlink>("Downlink", OnNotificationReceived, x=> x.WithTopic(nameof(QueueTypes.Queues.Downlink)));
             this._bus.Advanced.Connected += OnConnected;
