@@ -10,7 +10,7 @@ namespace container.Database
 
         Task<StubObject> Get(int Id);
 
-        Task<IEnumerable<StubObject>> GetAll();
+        Task<List<StubObject>> GetAll();
 
         Task Update(StubObject stubObject);
 

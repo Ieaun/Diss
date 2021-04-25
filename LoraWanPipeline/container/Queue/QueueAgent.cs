@@ -56,23 +56,34 @@
 
         public async Task EnqueueToUplink(LoraPacket receivedPacket)
         {
-            var packet = MapToQueueType(receivedPacket);
+            var packet = MapToUplinkType(receivedPacket);
 
-            _logger.Information("Publishing notification {@Notification}", packet);
+            _logger.Information("Publishing uplink notification {@Notification}", packet);
             await _bus.PubSub.PublishAsync(packet, handler => handler.WithTopic(nameof(QueueTypes.Queues.Downlink)));
         }
 
         public async Task EnqueueToStorage(LoraPacket receivedPacket)
         {
-            var packet = MapToQueueType(receivedPacket);
+            var packet = MapToStorageType(receivedPacket);
 
-            _logger.Information("Publishing notification {@Notification}", packet);
+            _logger.Information("Publishing storage notification {@Notification}", packet);
             await _bus.PubSub.PublishAsync(packet, handler => handler.WithTopic(nameof(QueueTypes.Models.LoraPacket)));
         }
 
-        public QueueTypes.Queues.Downlink MapToQueueType(LoraPacket receivedPacket)
+        public QueueTypes.Queues.Uplink MapToUplinkType(LoraPacket receivedPacket)
         {
-            return new QueueTypes.Queues.Downlink
+            return new QueueTypes.Queues.Uplink
+            {
+                Packet = new QueueTypes.Models.LoraPacket
+                {
+                    Payload = receivedPacket.Payload
+                }
+            };
+        }
+
+        public QueueTypes.Queues.Storage MapToStorageType(LoraPacket receivedPacket)
+        {
+            return new QueueTypes.Queues.Storage
             {
                 Packet = new QueueTypes.Models.LoraPacket
                 {

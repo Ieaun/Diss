@@ -1,11 +1,11 @@
 ﻿namespace DownlinkService.Queue
 {
     using System;
-    using System.Threading.Tasks;
     using EasyNetQ;
     using MediatR;
     using Serilog;
     using DownlinkService.Notifications;
+
     public class QueueAgent : IQueue
     {
         private IBus _bus;
@@ -19,16 +19,16 @@
             this._bus = bus;
 
             //this WILL throw an error if rabbit mq is not running. Rabbit mq must be running.
-            this._bus.PubSub.Subscribe<QueueTypes.Queues.Uplink>("Downlink", OnHandleNotification, x=> x.WithTopic(nameof(QueueTypes.Queues.Uplink)));
+            this._bus.PubSub.Subscribe<QueueTypes.Queues.Downlink>("Downlink", OnHandleNotification, x=> x.WithTopic(nameof(QueueTypes.Queues.Downlink)));
             this._bus.Advanced.Connected += OnConnected;
         }
 
         private void OnConnected(object sender, ConnectedEventArgs e)
         {
-            _bus.PubSub.Subscribe<QueueTypes.Queues.Uplink>("Downlink", OnHandleNotification, x => x.WithTopic(nameof(QueueTypes.Queues.Uplink)));
+            _bus.PubSub.Subscribe<QueueTypes.Queues.Downlink>("Downlink", OnHandleNotification, x => x.WithTopic(nameof(QueueTypes.Queues.Downlink)));
         }
 
-        public void OnHandleNotification(QueueTypes.Queues.Uplink packet)
+        public void OnHandleNotification(QueueTypes.Queues.Downlink packet)
         {
             _logger.Information("Received packet {@Packet}", packet);
             try
