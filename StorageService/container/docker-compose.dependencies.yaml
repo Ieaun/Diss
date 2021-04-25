@@ -1,0 +1,18 @@
+﻿version: "3.8"
+services:
+  storage-mongo:
+    image: mongo:latest
+    container_name: storage-mongo
+    ports:
+     - 31002:27017 
+    networks:
+     - lora
+    volumes:
+     - storage:/data/db 
+
+volumes:
+  storage:
+
+networks:
+    lora:
+      name: lora

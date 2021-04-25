@@ -1,0 +1,22 @@
+﻿version: "3.8"
+services: 
+    uplink-container:
+       build:
+         context: .
+         dockerfile: Debug.Dockerfile
+       ports:
+        - 30003:30003   
+       networks:
+        - lora
+       container_name: uplink-container
+       environment:
+        - ASPNETCORE_ENVIRONMENT=Test
+       volumes:
+        - uplink_mongo:/data/db 
+
+networks:
+  lora:
+    name: lora
+
+volumes:
+  uplink_mongo:

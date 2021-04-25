@@ -1,0 +1,18 @@
+﻿version: "3.8"
+services:
+  downlink-mongo:
+    image: mongo:latest
+    container_name: downlink-mongo
+    ports:
+     - 31001:27017 
+    networks:
+     - lora
+    volumes:
+     - downlink:/data/db 
+
+volumes:
+  downlink:
+
+networks:
+    lora:
+      name: lora

@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31129.286
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoraWAN_Pipeline", "container\LoraWAN_Pipeline.csproj", "{E0EE72BB-AA53-48DE-9B1E-3F58C0CE9D16}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QueueTypes", "..\QueueTypes\QueueTypes\QueueTypes.csproj", "{8E7F6AC1-6499-4839-B744-B4A2FC1EC751}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StorageService", "..\StorageService\container\StorageService.csproj", "{94F2E1BE-8F3F-416D-938D-835241D2A276}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UplinkService", "..\UplinkService\container\UplinkService.csproj", "{70F5C6ED-6429-4A9A-AE86-33026BC0AFD1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DownlinkService", "..\DownlinkService\container\DownlinkService.csproj", "{5C43CB65-98E8-49C5-80B9-501F06604AF6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E0EE72BB-AA53-48DE-9B1E-3F58C0CE9D16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0EE72BB-AA53-48DE-9B1E-3F58C0CE9D16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0EE72BB-AA53-48DE-9B1E-3F58C0CE9D16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0EE72BB-AA53-48DE-9B1E-3F58C0CE9D16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E7F6AC1-6499-4839-B744-B4A2FC1EC751}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E7F6AC1-6499-4839-B744-B4A2FC1EC751}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E7F6AC1-6499-4839-B744-B4A2FC1EC751}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E7F6AC1-6499-4839-B744-B4A2FC1EC751}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94F2E1BE-8F3F-416D-938D-835241D2A276}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94F2E1BE-8F3F-416D-938D-835241D2A276}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94F2E1BE-8F3F-416D-938D-835241D2A276}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94F2E1BE-8F3F-416D-938D-835241D2A276}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70F5C6ED-6429-4A9A-AE86-33026BC0AFD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70F5C6ED-6429-4A9A-AE86-33026BC0AFD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70F5C6ED-6429-4A9A-AE86-33026BC0AFD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70F5C6ED-6429-4A9A-AE86-33026BC0AFD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C43CB65-98E8-49C5-80B9-501F06604AF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C43CB65-98E8-49C5-80B9-501F06604AF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C43CB65-98E8-49C5-80B9-501F06604AF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C43CB65-98E8-49C5-80B9-501F06604AF6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0D499DCC-B710-4C58-81EF-D3C89B9AF3F7}
+	EndGlobalSection
+EndGlobal

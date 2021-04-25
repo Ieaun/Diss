@@ -1,0 +1,18 @@
+﻿version: "3.8"
+services:
+  uplink-mongo:
+    image: mongo:latest
+    container_name: uplink-mongo
+    ports:
+     - 31001:27017 
+    networks:
+     - lora
+    volumes:
+     - uplink:/data/db 
+
+volumes:
+  uplink:
+
+networks:
+    lora:
+      name: lora

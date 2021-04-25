@@ -1,0 +1,22 @@
+﻿version: "3.8"
+services: 
+    downlink-container:
+       build:
+         context: .
+         dockerfile: Debug.Dockerfile
+       ports:
+        - 30003:30003   
+       networks:
+        - lora
+       container_name: downlink-container
+       environment:
+        - ASPNETCORE_ENVIRONMENT=Test
+       volumes:
+        - downlink_mongo:/data/db 
+
+networks:
+  lora:
+    name: lora
+
+volumes:
+  downlink_mongo:

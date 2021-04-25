@@ -26,5 +26,27 @@
             };
             _handler.Send(packet);
         }
+
+        [HttpPost]
+        [Route("Uplink")]
+        public void SendUplink(string data)
+        {
+            LoraPacket packet = new LoraPacket
+            {
+                Payload = data
+            };
+            _handler.Send(packet);
+        }
+
+        [HttpPost]
+        [Route("Downlink")]
+        public void SendDownlink(string data)
+        {
+            LoraPacket packet = new LoraPacket
+            {
+                Payload = data
+            };
+            _handler.Send(packet);
+        }
     }
 }

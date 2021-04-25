@@ -1,5 +1,0 @@
-﻿version: "3.8"
-services:
-networks:
-    lora:
-      name: lora
