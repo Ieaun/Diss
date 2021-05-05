@@ -1,4 +1,6 @@
-﻿namespace LoraWAN_Pipeline.Tcp
+﻿using DownlinkService.Database;
+
+namespace LoraWAN_Pipeline.Tcp
 {
     using LoraWAN_Pipeline.Queue;
     using Microsoft.Extensions.Logging;
@@ -10,28 +12,32 @@
     {
         private readonly ILogger<TcpHandler> _logger;
         private readonly IQueue _queue;
-        private SimpleTcpClient _client;
-        public TcpHandler(ILogger<TcpHandler> logger, IQueue queue)
+        private SimpleTcpServer _client;
+        private readonly IDatabase _database;
+
+        public TcpHandler(ILogger<TcpHandler> logger, IQueue queue)//, IDatabase database)
         {
             this._logger = logger;
             this._queue = queue;
+            //this._database = database;
 
-            _client = new SimpleTcpClient("127.0.0.1:30099");
+            _client = new SimpleTcpServer("0.0.0.0:30099");
 
             // set events
-            _client.Events.Connected += Connected;
-            _client.Events.Disconnected += Disconnected;
+            _client.Events.ClientConnected += Connected;
+            _client.Events.ClientDisconnected += Disconnected;
             _client.Events.DataReceived += DataReceived;
         }
 
         public void Start()
         {
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 50; i++)
             {
                 try
                 {
-                    _client.Connect();
+                    _client.Start();
                     i = 5;
+                    return;
                 }
                 catch (Exception e)
                 {

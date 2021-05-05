@@ -31,7 +31,7 @@
             services.AddSingleton<IQueue,QueueAgent>();
 
             //services.AddSingleton(new MongoClient(configuration.GetConnectionString("MongoDb")));
-            //services.AddSingleton<IDatabase, Database>();
+            //services.AddSingleton<IDatabase, MongoDatabase>();
 
             services.AddSingleton<ITcpHandler,TcpHandler>();
 

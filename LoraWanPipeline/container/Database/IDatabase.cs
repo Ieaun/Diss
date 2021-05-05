@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using LoraWAN_Pipeline;
-
-namespace container.Database
+﻿namespace container.Database
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using LoraWAN_Pipeline;
     interface IDatabase
     {
         Task Create(StubObject stubObject);
