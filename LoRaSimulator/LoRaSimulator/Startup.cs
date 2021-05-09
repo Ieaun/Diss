@@ -39,7 +39,8 @@ namespace LoRaSimulator
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "LoRaSimulator v1"));
             }
 
-            app.ApplicationServices.GetService<ITcpHandler>().Start();
+            //app.ApplicationServices.GetService<ITcpHandler>().Start();
+            app.ApplicationServices.GetService<IUdpHandler>().Start();
             app.UseRouting();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>

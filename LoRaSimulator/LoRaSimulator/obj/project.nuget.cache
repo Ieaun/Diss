@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "aE/ThoNtfUxbxD2NZxKhIQZ14q1b/VgAzgagfmLagRsV4RSx58Y4FrYA4XJwYYORoQ4W072QnFMA2Txswha4sA==",
+  "dgSpecHash": "wRroizdCMOdUSuu0dYcB0mTlXRteEwGYpKqhHKzB6lU2jp/NIyh9KM81pijANUNYt6mVEwLBWYHyIw+0a7VxSg==",
   "success": true,
   "projectFilePath": "C:\\Users\\ieaun\\Desktop\\MSc_Diss\\LoRaSimulator\\LoRaSimulator\\LoRaSimulator.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\ieaun\\.nuget\\packages\\caching.dll\\1.3.4\\caching.dll.1.3.4.nupkg.sha512",
     "C:\\Users\\ieaun\\.nuget\\packages\\json.net\\1.0.25\\json.net.1.0.25.nupkg.sha512",
+    "C:\\Users\\ieaun\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\ieaun\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "C:\\Users\\ieaun\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\ieaun\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
@@ -14,6 +16,7 @@
     "C:\\Users\\ieaun\\.nuget\\packages\\serilog\\2.10.0\\serilog.2.10.0.nupkg.sha512",
     "C:\\Users\\ieaun\\.nuget\\packages\\serilog.sinks.console\\3.1.1\\serilog.sinks.console.3.1.1.nupkg.sha512",
     "C:\\Users\\ieaun\\.nuget\\packages\\serilog.sinks.file\\4.1.0\\serilog.sinks.file.4.1.0.nupkg.sha512",
+    "C:\\Users\\ieaun\\.nuget\\packages\\simpleudp\\1.0.0.4\\simpleudp.1.0.0.4.nupkg.sha512",
     "C:\\Users\\ieaun\\.nuget\\packages\\supersimpletcp\\2.4.0\\supersimpletcp.2.4.0.nupkg.sha512",
     "C:\\Users\\ieaun\\.nuget\\packages\\swashbuckle.aspnetcore\\5.6.3\\swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
     "C:\\Users\\ieaun\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.6.3\\swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",

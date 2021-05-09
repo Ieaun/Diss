@@ -22,7 +22,9 @@
 
         public static IServiceCollection AddSimulatorDataAccessLayer(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddSingleton<ITcpHandler,TcpHandler>();
+            //services.AddSingleton<ITcpHandler,TcpHandler>();
+            services.AddSingleton<IUdpHandler, UdpHandler>();
+            
             return services;
         }
     }

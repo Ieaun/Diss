@@ -60,6 +60,10 @@
               "target": "Package",
               "version": "[4.1.0, )"
             },
+            "SimpleUdp": {
+              "target": "Package",
+              "version": "[1.0.0.4, )"
+            },
             "SuperSimpleTcp": {
               "target": "Package",
               "version": "[2.4.0, )"

@@ -7,6 +7,8 @@
     using Serilog;
     using LoraWAN_Pipeline.Notifications;
     using LoraWAN_Pipeline.Tcp;
+    using LoraWAN_Pipeline.Models;
+
     public class QueueAgent : IQueue
     {
         private IBus _bus;

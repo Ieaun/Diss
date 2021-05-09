@@ -10,6 +10,7 @@
     using container.Database;
     using Microsoft.Extensions.Configuration;
     using MongoDB.Driver;
+    using LoraWAN_Pipeline.Udp;
 
     public static class ServiceCollectionExtensions
     {
@@ -34,6 +35,8 @@
             //services.AddSingleton<IDatabase, MongoDatabase>();
 
             services.AddSingleton<ITcpHandler,TcpHandler>();
+            services.AddSingleton<IUdpHandler, UdpHandler>();
+            services.AddSingleton<MessageHandler>();
 
             return services;
         }

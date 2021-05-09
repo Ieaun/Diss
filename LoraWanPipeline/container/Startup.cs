@@ -8,6 +8,8 @@ namespace LoraWAN_Pipeline
     using Microsoft.OpenApi.Models;
     using LoraWAN_Pipeline.Extensions;
     using LoraWAN_Pipeline.Tcp;
+    using LoraWAN_Pipeline.Udp;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -39,7 +41,10 @@ namespace LoraWAN_Pipeline
                 app.UseDeveloperExceptionPage();
             }
 
-            app.ApplicationServices.GetService<ITcpHandler>().Start();
+            //start servers
+            //// app.ApplicationServices.GetService<ITcpHandler>().Start();
+            app.ApplicationServices.GetService<IUdpHandler>().Start();
+
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {

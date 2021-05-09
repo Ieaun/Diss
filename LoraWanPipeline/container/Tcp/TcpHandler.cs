@@ -1,18 +1,18 @@
-﻿using DownlinkService.Database;
-
-namespace LoraWAN_Pipeline.Tcp
+﻿namespace LoraWAN_Pipeline.Tcp
 {
     using LoraWAN_Pipeline.Queue;
     using Microsoft.Extensions.Logging;
     using System;
     using System.Text;
     using SimpleTcp;
+    using DownlinkService.Database;
+    using LoraWAN_Pipeline.Models;
 
     public class TcpHandler : ITcpHandler
     {
         private readonly ILogger<TcpHandler> _logger;
         private readonly IQueue _queue;
-        private SimpleTcpServer _client;
+        private SimpleTcpServer _server;
         private readonly IDatabase _database;
 
         public TcpHandler(ILogger<TcpHandler> logger, IQueue queue)//, IDatabase database)
@@ -21,27 +21,27 @@ namespace LoraWAN_Pipeline.Tcp
             this._queue = queue;
             //this._database = database;
 
-            _client = new SimpleTcpServer("0.0.0.0:30099");
+            _server = new SimpleTcpServer("0.0.0.0:30099");
 
             // set events
-            _client.Events.ClientConnected += Connected;
-            _client.Events.ClientDisconnected += Disconnected;
-            _client.Events.DataReceived += DataReceived;
+            _server.Events.ClientConnected += Connected;
+            _server.Events.ClientDisconnected += Disconnected;
+            _server.Events.DataReceived += DataReceived;
         }
 
         public void Start()
         {
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < 5; i++)
             {
                 try
                 {
-                    _client.Start();
-                    i = 5;
+                    _server.Start();
+                    _logger.LogInformation("LoRaWAN Pipeline server started");
                     return;
                 }
                 catch (Exception e)
                 {
-                    _logger.LogInformation("failed to connect to LoRa hardware, try {x}/{y}", i+1,5);
+                    _logger.LogError("failed to connect to LoRa hardware, try {x}/{y}", i+1,5);
                     System.Threading.Thread.Sleep(i * 1000);
                 }
             }

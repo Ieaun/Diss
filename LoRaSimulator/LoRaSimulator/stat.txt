@@ -1,0 +1,1 @@
+☺E9,MT??C<P{"stat":{"time":"2021-05-09 11:28:12 GMT","lati":12.10200023651123,"long":10.010000228881836,"alti":10,"rxnb":0,"rxok":0,"rxfw":0,"ackr":0.0,"dwnb":0,"txnb":0,"pfrm":"SC Gateway 420","mail":"contact@whatever.com","desc":"Dragino Single Channel Gateway on RPI"}}
