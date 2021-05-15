@@ -18,45 +18,47 @@
             this._mongoClient = mongoClient;
         }
 
-        public async Task Create(StubObject stubObject)
+        private IMongoCollection<RegisteredDevice> GetCollection() => _mongoClient.GetDatabase($"{nameof(RegisteredDevice)}").GetCollection<RegisteredDevice>($"{nameof(RegisteredDevice)}");
+
+        public async Task Create(RegisteredDevice registeredDevice)
         {
-            _logger.LogDebug("Create request, creating: {@stubObject}", stubObject);
-            var collection = _mongoClient.GetDatabase($"{nameof(StubObject)}").GetCollection<StubObject>($"{nameof(StubObject)}");
-            await collection.InsertOneAsync(stubObject);
+            _logger.LogDebug("Create request, creating: {@registeredDevice}", registeredDevice);
+            var collection = GetCollection();
+            await collection.InsertOneAsync(registeredDevice);
 
         }
-        public async Task<StubObject> Get(int id)
+        public async Task<RegisteredDevice> Get(int id)
         {
             _logger.LogDebug("Get request, id: {@Id}", id);
-            var collection = _mongoClient.GetDatabase($"{nameof(StubObject)}").GetCollection<StubObject>($"{nameof(StubObject)}");
+            var collection = GetCollection();
 
-            var filter = Builders<StubObject>.Filter.Where(x => x.Id == id);
+            var filter = Builders<RegisteredDevice>.Filter.Where(x => x.Id == id);
 
             var stubObject = collection.Find(filter).FirstOrDefault();
             return stubObject;
         }
 
-        public async Task<List<StubObject>> GetAll()
+        public async Task<List<RegisteredDevice>> GetAll()
         {
             _logger.LogDebug("GetAll request");
-            var collection = _mongoClient.GetDatabase($"{nameof(UplinkService.StubObject)}").GetCollection<StubObject>($"{nameof(StubObject)}");
+            var collection = GetCollection();
             var stubObjects = await collection.Find(_ => true).ToListAsync();
             return stubObjects;
         }
 
-        public async Task Delete(StubObject stubObject)
+        public async Task Delete(RegisteredDevice registeredDevice)
         {
-            _logger.LogDebug("Delete request, deleting: {@StubObject}", stubObject);
-            var collection = _mongoClient.GetDatabase($"{nameof(StubObject)}").GetCollection<StubObject>($"{nameof(StubObject)}");
-            var filter = Builders<StubObject>.Filter.Eq("Id", stubObject.Id);
+            _logger.LogDebug("Delete request, deleting: {@registeredDevice}", registeredDevice);
+            var collection = GetCollection();
+            var filter = Builders<RegisteredDevice>.Filter.Eq("Id", registeredDevice.Id);
             await collection.DeleteOneAsync(filter);
         }
 
-        public async Task Update(StubObject stubObject)
+        public async Task Update(RegisteredDevice registeredDevice)
         {
-            _logger.LogDebug("Update request, update: {@StubObject}", stubObject);
-            var collection = _mongoClient.GetDatabase($"{nameof(StubObject)}").GetCollection<StubObject>($"{nameof(StubObject)}");
-            await collection.ReplaceOneAsync(doc => doc.Id == stubObject.Id, stubObject);
+            _logger.LogDebug("Update request, update: {@registeredDevice}", registeredDevice);
+            var collection = GetCollection();
+            await collection.ReplaceOneAsync(doc => doc.Id == registeredDevice.Id, registeredDevice);
         }
     }
 }

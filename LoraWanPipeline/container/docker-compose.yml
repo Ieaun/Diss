@@ -1,6 +1,6 @@
 ﻿version: "3.8"
 services: 
-    container:
+    lorawan-pipeline:
        build:
          context: .
          dockerfile: Debug.Dockerfile
@@ -8,10 +8,13 @@ services:
         - 30000:30000   
        networks:
         - lora
-       container_name: container
+       container_name: lorawan-pipeline
        environment:
         - ASPNETCORE_ENVIRONMENT=Test
 
 networks:
   lora:
     name: lora
+
+volumes:
+  devices_mongo:

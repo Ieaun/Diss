@@ -59,18 +59,7 @@
 
         public async void DataReceived(object sender, DataReceivedEventArgs e)
         {
-            LoraPacket packet = new LoraPacket
-            {
-                Payload = e.Data
-            };
-            await this._queue.EnqueueToUplink(packet);
-
-            //check if from registered device
-            var isRegisteredDevice = false;
-            if (isRegisteredDevice)
-            {
-                await this._queue.EnqueueToStorage(packet);
-            }
+      
             _logger.LogInformation("[" + e.IpPort + "] " + Encoding.UTF8.GetString(e.Data));
         }
     }

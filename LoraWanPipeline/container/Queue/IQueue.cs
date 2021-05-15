@@ -4,11 +4,11 @@
     using LoraWAN_Pipeline.Tcp;
     using LoraWAN_Pipeline.Notifications;
     using LoraWAN_Pipeline.Models;
+    using LoraWAN_Pipeline.Notifications.ReceivedPacket;
 
     public interface IQueue
     {
-        Task EnqueueToStorage(LoraPacket packet);
-        Task EnqueueToUplink(LoraPacket packet);
-        Task EnqueueToDownlink(Notification notification);
+        Task EnqueueToStorage(ISemtechUdpPacket packet);
+        Task EnqueueToUplink(ReceivedPacket packet);
     }
 }

@@ -3,16 +3,16 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using LoraWAN_Pipeline;
-    interface IDatabase
+    public interface IDatabase
     {
-        Task Create(StubObject stubObject);
+        Task Create(RegisteredDevice stubObject);
 
-        Task<StubObject> Get(int Id);
+        Task<RegisteredDevice> Get(int Id);
 
-        Task<List<StubObject>> GetAll();
+        Task<List<RegisteredDevice>> GetAll();
 
-        Task Update(StubObject stubObject);
+        Task Update(RegisteredDevice stubObject);
 
-        Task Delete(StubObject stubObject);
+        Task Delete(RegisteredDevice stubObject);
     }
 }

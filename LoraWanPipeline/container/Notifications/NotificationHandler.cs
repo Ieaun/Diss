@@ -1,35 +1,86 @@
 ﻿namespace LoraWAN_Pipeline.Notifications
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
+    using LoraWAN_Pipeline.Queue;
+    using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
     using MediatR;
     using Microsoft.Extensions.Logging;
+    using Newtonsoft.Json.Linq;
+    using LoraWAN_Pipeline.Notifications.GatewayStatusUpdate;
+    using LoraWAN_Pipeline.Models;
+    using LoraWAN_Pipeline.Notifications.TransmitPacket;
+    using LoraWAN_Pipeline.Notifications.ReceivedPacket;
+    using LoraWAN_Pipeline.ActivationByPersonalization.Decoders;
+
     public class NotificationHandler : INotificationHandler<Notification>
     {
-        private ILogger<NotificationHandler> logger;
-        public NotificationHandler(ILogger<NotificationHandler> logger)
+        private readonly ILogger<NotificationHandler> _logger;
+        private readonly IQueue _queue;
+        private readonly GatewayStatusMapper _gatewayStatusMapper;
+        private readonly TransmitPacketMapper _transmitPacketMapper;
+        private readonly ReceivedPacketMapper _receivedPacketMapper;
+        private readonly LoRaAbpDecoder _loRaAbpDecoder;
+        
+        public NotificationHandler(ILogger<NotificationHandler> logger, IQueue queue, GatewayStatusMapper gatewayStatusMapper,TransmitPacketMapper transmitPacketMapper, ReceivedPacketMapper receivedPacketMapper, LoRaAbpDecoder loRaAbpDecoder)
         {
-            this.logger = logger;
+            this._logger = logger;
+            this._queue = queue;
+            this._gatewayStatusMapper = gatewayStatusMapper;
+            this._transmitPacketMapper = transmitPacketMapper;
+            this._receivedPacketMapper = receivedPacketMapper;
+            this._loRaAbpDecoder = loRaAbpDecoder;
         }
 
-        public Task Handle(Notification notification, CancellationToken cancellationToken)
+        public async Task Handle(Notification notification, CancellationToken cancellationToken)
         {
-            logger.LogInformation("Recieved new notification :{@Notification}", notification);
+            _logger.LogInformation("Recieved new notification :{@Notification}", notification);
             try
             {
+                var data = Encoding.UTF8.GetString(notification.datagram.Data);
+                var sanitizedData = data.Remove(0, data.IndexOf('{'));
+                var messageType = sanitizedData.Substring(2, 4);
+                var message = sanitizedData.Substring(5);
+        
+                var jsonObj = JObject.Parse(sanitizedData);
 
+                // determine the type of packet
+                switch (messageType)
+                {
+                    case "stat":
+                        var gatewayStatus = _gatewayStatusMapper.Map(jsonObj);
+                        break;
+                    case "txpk":
+                        var transmitPacket = _transmitPacketMapper.Map(jsonObj);
+                        break;
+                    case "rxpk":
+                        var receivePacket = _receivedPacketMapper.Map(jsonObj);
+
+                        // used to determine who to send this to in Uplink service
+                        // sends to storage service here if true
+                        receivePacket.isRegesteredDevice = await _loRaAbpDecoder.IsRegistedDevice(receivePacket);
+                        
+                        await this._queue.EnqueueToUplink(receivePacket);
+                        break;
+                    default:
+                        break;
+                        throw new Exception("cant");
+                }               
+
+                _logger.LogInformation("[" + notification.datagram.Ip + ":" + notification.datagram.Port + "] " + Encoding.UTF8.GetString(notification.datagram.Data));
             }
             catch (Exception e)
             {
-                logger.LogInformation("Failed processing notification :{@Notification} with exception: {@Exception}", notification, e.Message);
-                return Task.CompletedTask;
+                _logger.LogInformation("Failed processing notification :{@Notification} with exception: {@Exception}", notification, e.Message);
             }
 
-            logger.LogInformation("Finished processing notification :{@Notification}", notification);
-            return Task.CompletedTask;
+            _logger.LogInformation("Finished processing notification :{@Notification}", notification);
+        }
+
+        private void ParseManually(string sanitizedData)
+        {
+            throw new NotImplementedException();
         }
     }
 }

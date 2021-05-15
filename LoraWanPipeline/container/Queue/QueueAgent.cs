@@ -8,6 +8,7 @@
     using LoraWAN_Pipeline.Notifications;
     using LoraWAN_Pipeline.Tcp;
     using LoraWAN_Pipeline.Models;
+    using LoraWAN_Pipeline.Notifications.ReceivedPacket;
 
     public class QueueAgent : IQueue
     {
@@ -39,8 +40,7 @@
             {
                 _mediator.Publish(new Notification
                 {
-                    Id = 1,
-                    Payload = packet.Packet
+                    datagram = null //packet.Packet
                 });
             }
             catch (Exception e)
@@ -56,40 +56,40 @@
             await _bus.PubSub.PublishAsync(notification, handler => handler.WithTopic(nameof(Notification)));
         }
 
-        public async Task EnqueueToUplink(LoraPacket receivedPacket)
+        public async Task EnqueueToUplink(ReceivedPacket receivedPacket)
         {
-            var packet = MapToUplinkType(receivedPacket);
+            //var packet = MapToUplinkType(receivedPacket);
 
-            _logger.Information("Publishing uplink notification {@Notification}", packet);
-            await _bus.PubSub.PublishAsync(packet, handler => handler.WithTopic(nameof(QueueTypes.Queues.Downlink)));
+            //_logger.Information("Publishing uplink notification {@Notification}", packet);
+            //await _bus.PubSub.PublishAsync(packet, handler => handler.WithTopic(nameof(QueueTypes.Queues.Downlink)));
         }
 
-        public async Task EnqueueToStorage(LoraPacket receivedPacket)
+        public async Task EnqueueToStorage(ISemtechUdpPacket receivedPacket)
         {
-            var packet = MapToStorageType(receivedPacket);
+            //var packet = MapToStorageType(receivedPacket);
 
-            _logger.Information("Publishing storage notification {@Notification}", packet);
-            await _bus.PubSub.PublishAsync(packet, handler => handler.WithTopic(nameof(QueueTypes.Models.LoraPacket)));
+            //_logger.Information("Publishing storage notification {@Notification}", packet);
+            //await _bus.PubSub.PublishAsync(packet, handler => handler.WithTopic(nameof(QueueTypes.Models.LoraPacket)));
         }
 
-        public QueueTypes.Queues.Uplink MapToUplinkType(LoraPacket receivedPacket)
+        public QueueTypes.Queues.Uplink MapToUplinkType(ReceivedPacket receivedPacket)
         {
             return new QueueTypes.Queues.Uplink
             {
                 Packet = new QueueTypes.Models.LoraPacket
                 {
-                    Payload = receivedPacket.Payload
+                    //Payload = receivedPacket.Payload
                 }
             };
         }
 
-        public QueueTypes.Queues.Storage MapToStorageType(LoraPacket receivedPacket)
+        public QueueTypes.Queues.Storage MapToStorageType(ISemtechUdpPacket receivedPacket)
         {
             return new QueueTypes.Queues.Storage
             {
                 Packet = new QueueTypes.Models.LoraPacket
                 {
-                    Payload = receivedPacket.Payload
+                    //Payload = receivedPacket.Payload
                 }
             };
         }

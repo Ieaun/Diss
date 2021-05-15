@@ -1,5 +1,18 @@
 ﻿version: "3.8"
 services:
+  devices-mongo:
+    image: mongo:latest
+    container_name: devices-mongo
+    ports:
+     - 31000:27017 
+    networks:
+     - lora
+    volumes:
+     - storage:/data/db 
+
+volumes:
+  storage:
+
 networks:
     lora:
       name: lora

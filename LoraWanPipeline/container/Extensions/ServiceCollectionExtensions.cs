@@ -11,6 +11,11 @@
     using Microsoft.Extensions.Configuration;
     using MongoDB.Driver;
     using LoraWAN_Pipeline.Udp;
+    using LoraWAN_Pipeline.Notifications.GatewayStatusUpdate;
+    using LoraWAN_Pipeline.Notifications.TransmitPacket;
+    using LoraWAN_Pipeline.Notifications.ReceivedPacket;
+    using LoraWAN_Pipeline.ActivationByPersonalization.Decoders;
+    using LoraWAN_Pipeline.Decoders.ActivationByPersonalization;
 
     public static class ServiceCollectionExtensions
     {
@@ -23,6 +28,13 @@
 
             services.AddMediatR(typeof(Program));
             services.AddSingleton<ILogger>(Log.Logger);
+
+            services.AddSingleton<GatewayStatusMapper>();
+            services.AddSingleton<ReceivedPacketMapper>();
+            services.AddSingleton<TransmitPacketMapper>();
+            services.AddSingleton<LoRaAbpDecoder>();
+            services.AddSingleton<AbpValidator>();
+
             return services;
         }
 
@@ -31,12 +43,11 @@
             services.RegisterEasyNetQ(configuration.GetConnectionString("Queue"));
             services.AddSingleton<IQueue,QueueAgent>();
 
-            //services.AddSingleton(new MongoClient(configuration.GetConnectionString("MongoDb")));
-            //services.AddSingleton<IDatabase, MongoDatabase>();
+            services.AddSingleton(new MongoClient(configuration.GetConnectionString("MongoDb")));
+            services.AddSingleton<IDatabase, MongoDatabase>();
 
             services.AddSingleton<ITcpHandler,TcpHandler>();
             services.AddSingleton<IUdpHandler, UdpHandler>();
-            services.AddSingleton<MessageHandler>();
 
             return services;
         }

@@ -6,26 +6,40 @@
     using System.Text;
     using SimpleUdp;
     using DownlinkService.Database;
-    using LoraWAN_Pipeline.Models;
+    using MediatR;
+    using LoraWAN_Pipeline.Notifications;
+    using LoraWAN_Pipeline.ActivationByPersonalization.Decoders;
+    
 
     public class UdpHandler : IUdpHandler
     {
         private readonly ILogger<UdpHandler> _logger;
         private UdpEndpoint _endPoint;
         private readonly IDatabase _database;
-        private MessageHandler _messageHandler;
+        private readonly IMediator _mediator; 
+        private readonly LoRaAbpDecoder _loRaAbpDecoder; 
 
-        public UdpHandler(ILogger<UdpHandler> logger, IQueue queue, MessageHandler messageHandler)//, IDatabase database)
+        public UdpHandler(ILogger<UdpHandler> logger, IQueue queue, IMediator mediator, LoRaAbpDecoder loRaAbpDecoder)
         {
             _logger = logger;
-            this._messageHandler = messageHandler;
-            //this._database = database;
+            this._mediator = mediator;
+            this._loRaAbpDecoder = loRaAbpDecoder;
 
             _endPoint = new UdpEndpoint("192.168.8.100", 30099);
             _endPoint.EndpointDetected += EndpointDetected;
 
             // only if you want to receive messages...
             _endPoint.DatagramReceived += DatagramReceived;
+
+            var key = new byte[]{
+                0xB3, 0x38, 0xEB, 0xD8, 0x72, 0x2A, 0x76, 0x4E, 0xBD, 0x9E, 0x9D, 0xF0, 0x4D, 0x7C, 0xCA, 0xE1
+            };
+
+            var cipherText = @"QCIQASaAAAABz+ZtENUq9UCUIgrynehqYt8=";
+
+            _loRaAbpDecoder.DecodePhysicalPayload(cipherText);
+
+            string heree = "";
         }
 
         public void Start()
@@ -60,7 +74,10 @@
         public async void DatagramReceived(object sender, Datagram dg)
         {
             _logger.LogInformation("[" + dg.Ip + ":" + dg.Port + "]: " + Encoding.UTF8.GetString(dg.Data));
-            await _messageHandler.Handle(dg);
+
+            await _mediator.Publish(new Notification {
+                datagram = dg
+            });
         }
     }
 }
