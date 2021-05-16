@@ -5,14 +5,14 @@
     using LoraWAN_Pipeline;
     public interface IDatabase
     {
-        Task Create(RegisteredDevice stubObject);
+        Task Create(RegisteredDevice registeredDevice);
 
-        Task<RegisteredDevice> Get(int Id);
+        Task<RegisteredDevice> Get(string DeviceAddress);
 
         Task<List<RegisteredDevice>> GetAll();
 
-        Task Update(RegisteredDevice stubObject);
+        Task Update(RegisteredDevice registeredDevice);
 
-        Task Delete(RegisteredDevice stubObject);
+        Task Delete(RegisteredDevice registeredDevice);
     }
 }

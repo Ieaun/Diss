@@ -7,7 +7,7 @@
     {
         void DatagramReceived(object sender, Datagram dg);
 
-        void Send();
+        void Send(string message);
 
         void Start();
     }

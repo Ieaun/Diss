@@ -8,14 +8,13 @@
     using LoraWAN_Pipeline.Notifications;
     using LoraWAN_Pipeline.Tcp;
     using LoraWAN_Pipeline.Models;
-    using LoraWAN_Pipeline.Notifications.ReceivedPacket;
+    using LoraWAN_Pipeline.Notifications.ReceivedPackets;
 
     public class QueueAgent : IQueue
     {
         private IBus _bus;
         private ILogger _logger;
         private IMediator _mediator;
-        private ITcpHandler _tcpHandler;
 
         public QueueAgent(IBus bus, ILogger logger, IMediator mediator)
         {

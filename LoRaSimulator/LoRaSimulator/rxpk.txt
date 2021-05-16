@@ -1,1 +1,1 @@
-"\u0001f2\0,MT��C<P{\"rxpk\":[{\"tmst\":238504441,\"freq\":868.1,\"chan\":0,\"rfch\":0,\"stat\":1,\"modu\":\"LORA\",\"datr\":\"SF7BW125\",\"codr\":\"4/5\",\"rssi\":-32,\"lsnr\":9.0,\"size\":26,\"data\":\"QCIQASaAAAABz+ZtENUq9UCUIgrynehqYt8=\"}]}"
+\u0001f2\0,MT��C<P{"rxpk":{"tmst":238504441,"freq":868.1,"chan":0,"rfch":0,"stat":1,"modu":"LORA","datr":"SF7BW125","codr":"4/5","rssi":-32,"lsnr":9.0,"size":26,"data":"QCIQASaAAAABz+ZtENUq9UCUIgrynehqYt8="}}

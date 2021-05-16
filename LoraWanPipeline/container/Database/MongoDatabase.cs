@@ -27,30 +27,30 @@
             await collection.InsertOneAsync(registeredDevice);
 
         }
-        public async Task<RegisteredDevice> Get(int id)
+        public async Task<RegisteredDevice> Get(string DeviceAddress)
         {
-            _logger.LogDebug("Get request, id: {@Id}", id);
+            _logger.LogDebug("Get request, Device Address: {@DeviceAddress}", DeviceAddress);
             var collection = GetCollection();
 
-            var filter = Builders<RegisteredDevice>.Filter.Where(x => x.Id == id);
+            var filter = Builders<RegisteredDevice>.Filter.Where(x => x.DeviceAddress == DeviceAddress);
 
-            var stubObject = collection.Find(filter).FirstOrDefault();
-            return stubObject;
+            var device = collection.Find(filter).FirstOrDefault();
+            return device;
         }
 
         public async Task<List<RegisteredDevice>> GetAll()
         {
             _logger.LogDebug("GetAll request");
             var collection = GetCollection();
-            var stubObjects = await collection.Find(_ => true).ToListAsync();
-            return stubObjects;
+            var device = await collection.Find(_ => true).ToListAsync();
+            return device;
         }
 
         public async Task Delete(RegisteredDevice registeredDevice)
         {
             _logger.LogDebug("Delete request, deleting: {@registeredDevice}", registeredDevice);
             var collection = GetCollection();
-            var filter = Builders<RegisteredDevice>.Filter.Eq("Id", registeredDevice.Id);
+            var filter = Builders<RegisteredDevice>.Filter.Eq("DeviceAddress", registeredDevice.DeviceAddress);
             await collection.DeleteOneAsync(filter);
         }
 
@@ -58,7 +58,7 @@
         {
             _logger.LogDebug("Update request, update: {@registeredDevice}", registeredDevice);
             var collection = GetCollection();
-            await collection.ReplaceOneAsync(doc => doc.Id == registeredDevice.Id, registeredDevice);
+            await collection.ReplaceOneAsync(doc => doc.DeviceAddress == registeredDevice.DeviceAddress, registeredDevice);
         }
     }
 }

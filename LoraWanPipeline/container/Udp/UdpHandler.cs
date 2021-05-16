@@ -15,7 +15,6 @@
     {
         private readonly ILogger<UdpHandler> _logger;
         private UdpEndpoint _endPoint;
-        private readonly IDatabase _database;
         private readonly IMediator _mediator; 
         private readonly LoRaAbpDecoder _loRaAbpDecoder; 
 
@@ -30,16 +29,6 @@
 
             // only if you want to receive messages...
             _endPoint.DatagramReceived += DatagramReceived;
-
-            var key = new byte[]{
-                0xB3, 0x38, 0xEB, 0xD8, 0x72, 0x2A, 0x76, 0x4E, 0xBD, 0x9E, 0x9D, 0xF0, 0x4D, 0x7C, 0xCA, 0xE1
-            };
-
-            var cipherText = @"QCIQASaAAAABz+ZtENUq9UCUIgrynehqYt8=";
-
-            _loRaAbpDecoder.DecodePhysicalPayload(cipherText);
-
-            string heree = "";
         }
 
         public void Start()

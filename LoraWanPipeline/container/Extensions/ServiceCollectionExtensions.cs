@@ -13,7 +13,7 @@
     using LoraWAN_Pipeline.Udp;
     using LoraWAN_Pipeline.Notifications.GatewayStatusUpdate;
     using LoraWAN_Pipeline.Notifications.TransmitPacket;
-    using LoraWAN_Pipeline.Notifications.ReceivedPacket;
+    using LoraWAN_Pipeline.Notifications.ReceivedPackets;
     using LoraWAN_Pipeline.ActivationByPersonalization.Decoders;
     using LoraWAN_Pipeline.Decoders.ActivationByPersonalization;
 

@@ -4,7 +4,7 @@
     using LoraWAN_Pipeline.Tcp;
     using LoraWAN_Pipeline.Notifications;
     using LoraWAN_Pipeline.Models;
-    using LoraWAN_Pipeline.Notifications.ReceivedPacket;
+    using LoraWAN_Pipeline.Notifications.ReceivedPackets;
 
     public interface IQueue
     {

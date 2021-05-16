@@ -2,8 +2,6 @@
 {
     public class FrameHeader
     {
-        public string OriginalHexString { get; set; }
-
         public string DeviceAddress { get; set; }
 
         public string FrameControlOctet { get; set; }

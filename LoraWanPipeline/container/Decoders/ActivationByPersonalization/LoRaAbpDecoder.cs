@@ -1,44 +1,50 @@
 ﻿namespace LoraWAN_Pipeline.ActivationByPersonalization.Decoders
 {
     using container.Database;
-    using LoraWAN_Pipeline.Notifications.ReceivedPacket;
     using Microsoft.Extensions.Logging;
     using LoraWAN_Pipeline.Queue;
     using System.Threading.Tasks;
-    using LoraWAN_Pipeline.Decoders.ActivationByPersonalization;
     using LoraWAN_Pipeline.Models;
     using System;
     using LoraWAN_Pipeline.Models.LoRaWanPacketSections;
     using System.Linq;
+    using LoraWAN_Pipeline.Notifications.ReceivedPackets;
 
     public class LoRaAbpDecoder
     {
         private readonly ILogger<LoRaAbpDecoder> _logger;
         private readonly IQueue _queue;
         private readonly IDatabase _database;
-        private readonly AbpValidator _abpValidator;
 
-        public LoRaAbpDecoder(ILogger<LoRaAbpDecoder> logger, IQueue queue, IDatabase database, AbpValidator abpValidator)
+        public LoRaAbpDecoder(ILogger<LoRaAbpDecoder> logger, IQueue queue, IDatabase database)
         {
             this._logger = logger;
             this._queue = queue;
             this._database = database;
-            this._abpValidator = abpValidator;
         }
 
-        public async Task<string> DecodeMessage(ReceivedPacket receivePacket) 
+        public async Task<bool> IsRegistedDevice(ReceivedPacketMetadata receivePacket)
         {
-            string decodedMessage = null;
+            var decodedMessage = DecodeMessage(receivePacket.Data);
 
-            DecodedLoraPacket decodedPacket = DecodePhysicalPayload(receivePacket.metadata.Data);
+            // check mif it matches any device addresses we have 
+            var device = _database.Get(decodedMessage.PhysicalPayload.MacPayload.FrameHeader.DeviceAddress);
 
-            //validate the decoded packet
-            //this._abpValidator.Validate(decodedPacket);                  
+            if (device != null)
+            {
+                var packet = new ReceivedPacket {
+                    decodedPacket = decodedMessage,
+                    isRegesteredDevice = true,
+                    metadata = receivePacket
+                };
 
-            return decodedMessage;
+                await this._queue.EnqueueToStorage(packet);
+                return true;
+            }
+            return false;
         }
 
-        public DecodedLoraPacket DecodePhysicalPayload(string encodedPhysicalPayload)
+        public DecodedLoraPacket DecodeMessage(string encodedPhysicalPayload)
         {
             // conver to hex
             var byteArray = Convert.FromBase64String(encodedPhysicalPayload);
@@ -52,50 +58,46 @@
 
             var physicalPayload = new PhysicalPayload
             {
-                OriginalHexString = string.Join("", hexValuesList),
                 MacHeader = hexValuesList[0],
                 MIC = string.Join("",hexValuesList).Substring((hexValuesList.Count * 2) -8, 8)
             };
-
-            // TODO : need sise of the mac payload items ?!?!? 
-            hexValuesList.RemoveRange((hexValuesList.Count * 2)-5, 4);
+            hexValuesList.RemoveRange(hexValuesList.Count -4, 4);
             hexValuesList.RemoveAt(0);
-            var macPayload = new MacPayload
-            {
-                OriginalHexString = string.Join("", hexValuesList),            
-            };
 
             var frameHeader = new FrameHeader 
             {       
-                OriginalHexString = string.Join("", hexValuesList),
-                DeviceAddress = string.Join("", hexValuesList).Substring(0, 4),
+                DeviceAddress = hexValuesList[3] + hexValuesList[2] + hexValuesList[1] + hexValuesList[0], // big endian
                 FrameControlOctet = hexValuesList[4],
-                FrameCounter = string.Join("", hexValuesList).Substring(5, 2)          
+                FrameCounter = hexValuesList[6] + hexValuesList[5] // big endian        
             };
-            frameHeader.FrameOptions = frameHeader.FrameControlOctet[1] != '0' ?
-                string.Join("", hexValuesList).Substring(7, (frameHeader.FrameControlOctet[1] - '0') * 2)  : null;
 
-            hexValuesList.RemoveRange(0, 7 + (frameHeader.FrameControlOctet[1] - '0'));
+            // frame options is optional, need to work out size / if its present using octet
+            var binaryFrameControl = Convert.ToString(Convert.ToInt32(frameHeader.FrameControlOctet, 16), 2);         
+            var frameOptionsOffset = Convert.ToInt32(binaryFrameControl.Substring(binaryFrameControl.Length - 3, 3));
+            if (frameOptionsOffset != 0) {
+                for (int i = 1; i <= frameOptionsOffset; i++)
+                {
+                    frameHeader.FrameOptions += hexValuesList[6 + i];
+                }
+            }
 
-            macPayload.FramePort = hexValuesList[0];
-            macPayload.FramePayload = hexValuesList.GetRange(1, hexValuesList.Count - 2).ToString();
+            // FramePayload
+            var values = string.Join("", hexValuesList);
+            var payloadOffset = 16 + (frameOptionsOffset * 2);
+
+            var macPayload = new MacPayload
+            {
+                FramePort = hexValuesList[7 + frameOptionsOffset],
+                FramePayload = values.Substring(payloadOffset, values.Length - payloadOffset),
+                FrameHeader = frameHeader
+            };        
 
             // combine structures
-            macPayload.FrameHeader = frameHeader;
             physicalPayload.MacPayload = macPayload;
             decodedPacket.PhysicalPayload = physicalPayload;
 
             return decodedPacket;
         }
 
-        public async Task<bool> IsRegistedDevice(ReceivedPacket receivePacket) 
-        {
-            var decodedMessage = DecodeMessage(receivePacket);
-            if (decodedMessage != null) {
-                await this._queue.EnqueueToStorage(receivePacket);
-                return true;
-            }
-            return false;
-        }
     }
 }

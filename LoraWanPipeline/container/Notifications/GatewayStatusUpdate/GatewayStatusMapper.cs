@@ -1,10 +1,6 @@
 ﻿namespace LoraWAN_Pipeline.Notifications.GatewayStatusUpdate
 {
     using Newtonsoft.Json.Linq;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
 
     public class GatewayStatusMapper
     {

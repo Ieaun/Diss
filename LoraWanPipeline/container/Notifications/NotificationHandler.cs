@@ -11,8 +11,10 @@
     using LoraWAN_Pipeline.Notifications.GatewayStatusUpdate;
     using LoraWAN_Pipeline.Models;
     using LoraWAN_Pipeline.Notifications.TransmitPacket;
-    using LoraWAN_Pipeline.Notifications.ReceivedPacket;
     using LoraWAN_Pipeline.ActivationByPersonalization.Decoders;
+    using Newtonsoft.Json;
+    using System.Collections.Generic;
+    using LoraWAN_Pipeline.Notifications.ReceivedPackets;
 
     public class NotificationHandler : INotificationHandler<Notification>
     {
@@ -55,13 +57,19 @@
                         var transmitPacket = _transmitPacketMapper.Map(jsonObj);
                         break;
                     case "rxpk":
-                        var receivePacket = _receivedPacketMapper.Map(jsonObj);
+                        sanitizedData = sanitizedData.Remove(0, sanitizedData.IndexOf('['));
+                        sanitizedData = sanitizedData.Remove(sanitizedData.Length -1, 1);
+                        var receivedPacketsMetadata = JsonConvert.DeserializeObject<List<ReceivedPacketMetadata>>(sanitizedData);
 
-                        // used to determine who to send this to in Uplink service
-                        // sends to storage service here if true
-                        receivePacket.isRegesteredDevice = await _loRaAbpDecoder.IsRegistedDevice(receivePacket);
-                        
-                        await this._queue.EnqueueToUplink(receivePacket);
+                        foreach (var receivePacket in receivedPacketsMetadata)
+                        {
+                            // used to determine who to send this to in Uplink service
+                            // sends to storage service here if true
+                            var isRegesteredDevice = await _loRaAbpDecoder.IsRegistedDevice(receivePacket);
+                            
+                            await this._queue.EnqueueToUplink(new ReceivedPacket { isRegesteredDevice = isRegesteredDevice,metadata = receivePacket });
+                        }
+
                         break;
                     default:
                         break;

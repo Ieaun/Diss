@@ -13,13 +13,11 @@
         private readonly ILogger<TcpHandler> _logger;
         private readonly IQueue _queue;
         private SimpleTcpServer _server;
-        private readonly IDatabase _database;
 
         public TcpHandler(ILogger<TcpHandler> logger, IQueue queue)//, IDatabase database)
         {
             this._logger = logger;
             this._queue = queue;
-            //this._database = database;
 
             _server = new SimpleTcpServer("0.0.0.0:30099");
 

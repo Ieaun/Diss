@@ -2,8 +2,6 @@
 {
     public class PhysicalPayload
     {
-        public string OriginalHexString { get; set; }
-
         public string MacHeader { get; set; }
 
         public MacPayload MacPayload { get; set; }

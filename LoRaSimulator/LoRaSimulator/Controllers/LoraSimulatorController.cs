@@ -3,50 +3,58 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
     using LoRaSimulator.Tcp;
+    using LoRaSimulator.Models;
+    using Newtonsoft.Json;
 
     [ApiController]
     [Route("[controller]")]
     public class LoraSimulatorController : ControllerBase
     {
         private readonly ILogger<LoraSimulatorController> _logger;
-        private readonly ITcpHandler _handler;
+        private readonly IUdpHandler _udpHandler;
 
-        public LoraSimulatorController(ILogger<LoraSimulatorController> logger, ITcpHandler handler)
+        public LoraSimulatorController(ILogger<LoraSimulatorController> logger, IUdpHandler handler)
         {
             _logger = logger;
-            _handler = handler;
+            _udpHandler = handler;
         }
 
         [HttpPost]
         public void Send(string data)
         {
-            LoraPacket packet = new LoraPacket
-            {
-                Payload = data
-            };
-            _handler.Send(packet);
+            _udpHandler.Send(data);
         }
 
         [HttpPost]
-        [Route("Uplink")]
-        public void SendUplink(string data)
+        [Route("Udp/Uplink/GatewayStatusUpdate")]
+        public void SendUplinkGatewayStatusUpdate(GatewayStatusUpdate gatewayStatusUpdate)
         {
-            LoraPacket packet = new LoraPacket
-            {
-                Payload = data
-            };
-            _handler.Send(packet);
+            var serializedPacket = JsonConvert.SerializeObject(gatewayStatusUpdate);
+            _udpHandler.Send("{stat:" + serializedPacket + "}");
         }
 
         [HttpPost]
-        [Route("Downlink")]
-        public void SendDownlink(string data)
+        [Route("Udp/Uplink/GatewayStatusUpdate/Sample")]
+        public void SendUplinkGatewayStatusUpdateSample()
         {
-            LoraPacket packet = new LoraPacket
-            {
-                Payload = data
-            };
-            _handler.Send(packet);
+            var sample = System.IO.File.ReadAllText("stat.txt");
+            _udpHandler.Send(sample);
+        }
+
+        [HttpPost]
+        [Route("Udp/Uplink/RecievedMessage")]
+        public void SendUplinkRecievedMessage(ReceivedPacket receivedPacket)
+        {
+            var serializedPacket = JsonConvert.SerializeObject(receivedPacket);
+            _udpHandler.Send("{rxpk:"+serializedPacket+"}");
+        }
+
+        [HttpPost]
+        [Route("Udp/Uplink/RecievedMessage/Sample")]
+        public void SendUplinkRecievedMessageSample()
+        {
+            var sample = System.IO.File.ReadAllText("rxpk.txt");
+            _udpHandler.Send(sample);
         }
     }
 }

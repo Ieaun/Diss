@@ -18,7 +18,7 @@
         public void Start()
         {
             _logger.LogInformation("Starting Udp Handler");
-            _endpoint = new UdpEndpoint("127.0.0.1", 8000);
+            _endpoint = new UdpEndpoint("127.0.0.1", 30098);
             _endpoint.EndpointDetected += EndpointDetected;
 
             // only if you want to receive messages...
@@ -26,10 +26,9 @@
             _endpoint.StartServer();
         }
 
-        public void Send()
+        public void Send(string message)
         {
-            var message = File.ReadAllText("stat.txt");
-            _endpoint.Send("127.0.0.1", 8001, "Hello to my friend listening on port 8001!");
+            _endpoint.Send("192.168.8.100", 30099, message);
         }
 
         public void EndpointDetected(object sender, EndpointMetadata md)
