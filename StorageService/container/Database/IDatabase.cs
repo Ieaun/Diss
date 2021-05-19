@@ -3,17 +3,18 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using StorageService;
+    using StorageService.Notifications.ReceivedPackets;
 
     public interface IDatabase
     {
-        Task Create(StubObject stubObject);
+        Task Create(NewPacket stubObject);
 
-        Task<StubObject> Get(int Id);
+        Task<NewPacket> Get(int Id);
 
-        Task<List<StubObject>> GetAll();
+        Task<List<NewPacket>> GetAll();
 
-        Task Update(StubObject stubObject);
+        Task Update(NewPacket stubObject);
 
-        Task Delete(StubObject stubObject);
+        Task Delete(NewPacket stubObject);
     }
 }

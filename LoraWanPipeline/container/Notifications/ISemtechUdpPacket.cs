@@ -2,5 +2,6 @@
 {
     public interface ISemtechUdpPacket
     {
+        public string PacketType { get; }
     }
 }

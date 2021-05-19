@@ -2,7 +2,7 @@
 {
     using Newtonsoft.Json;
 
-    public class ReceivedPacketMetadata : ISemtechUdpPacket
+    public class RecievedPacketMetadata 
     {
         // Descriptions taken from: https://github.com/Lora-net/packet_forwarder/blob/master/PROTOCOL.TXT
 

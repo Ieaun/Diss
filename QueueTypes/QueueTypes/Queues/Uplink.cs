@@ -1,11 +1,11 @@
 ﻿namespace QueueTypes.Queues
 {
-    using QueueTypes.Models;
     using EasyNetQ;
+    using QueueTypes.Models;
 
     [Queue("Uplink", ExchangeName = "LoRaWAN Exchange")]
     public class Uplink
     {
-        public LoraPacket Packet { get; set; }
+        public NewPacket Packet { get; set; }
     }
 }

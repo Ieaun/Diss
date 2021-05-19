@@ -6,6 +6,6 @@
     [Queue("Storage", ExchangeName = "LoRaWAN Exchange")]
     public class Storage
     {
-        public LoraPacket Packet { get; set; }
+        public NewPacket Packet { get; set; }
     }
 }

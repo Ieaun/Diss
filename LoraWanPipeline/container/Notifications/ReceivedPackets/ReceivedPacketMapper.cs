@@ -6,8 +6,7 @@
     {
         public ReceivedPacket Map(JObject jsonObj)
         {
-            //var Timestamp = int.Parse(jsonObj.First.First["tmst"].ToString());
-
+            var Timestamp = int.Parse(jsonObj.First.First["tmst"].ToString());
             var Frequency = double.Parse(jsonObj.First.First["freq"].ToString());
             var Channel = int.Parse(jsonObj.First.First["chan"].ToString());
             var RadioFrequencyChannel = int.Parse(jsonObj.First.First["rfch"].ToString());
@@ -24,7 +23,7 @@
 
             return new ReceivedPacket
             {
-                metadata = new ReceivedPacketMetadata
+                metadata = new TransmitPacketMetadata
                 {
                     Timestamp = int.Parse(jsonObj.First.First["tmst"].ToString()),
                     Frequency = double.Parse(jsonObj.First.First["freq"].ToString()),

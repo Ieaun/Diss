@@ -1,4 +1,4 @@
-﻿namespace LoraWAN_Pipeline.Notifications.TransmitPacket
+﻿namespace LoraWAN_Pipeline.Notifications.TransmitPackets
 {
     using Newtonsoft.Json.Linq;
     using System;
@@ -8,9 +8,9 @@
 
     public class TransmitPacketMapper
     {
-        public TransmitPacket Map(JObject jsonObj)
+        public TransmitPacketMetadata Map(JObject jsonObj)
         {
-            return new TransmitPacket
+            return new TransmitPacketMetadata
             {
                 Latitude = double.Parse(jsonObj.First.First["lati"].ToString()),
                 Longitude = double.Parse(jsonObj.First.First["long"].ToString()),

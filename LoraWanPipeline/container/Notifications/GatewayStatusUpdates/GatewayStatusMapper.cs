@@ -1,12 +1,12 @@
-﻿namespace LoraWAN_Pipeline.Notifications.GatewayStatusUpdate
+﻿namespace LoraWAN_Pipeline.Notifications.GatewayStatusUpdates
 {
     using Newtonsoft.Json.Linq;
 
     public class GatewayStatusMapper
     {
-        public GatewayStatusUpdate Map(JObject jsonObj)
+        public GatewayStatusUpdateMetadata Map(JObject jsonObj)
         {
-            return new GatewayStatusUpdate
+            return new GatewayStatusUpdateMetadata
             {
                 Latitude = double.Parse(jsonObj.First.First["lati"].ToString()),
                 Longitude = double.Parse(jsonObj.First.First["long"].ToString()),

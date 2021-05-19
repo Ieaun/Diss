@@ -4,10 +4,14 @@
 
     public class ReceivedPacket : ISemtechUdpPacket
     {
-        public ReceivedPacketMetadata metadata { get; set; }
+        public RecievedPacketMetadata metadata { get; set; }
 
         public DecodedLoraPacket decodedPacket { get; set; }
 
         public bool isRegesteredDevice { get; set; }
+
+        public byte[] OriginalMessage { get; set; }
+
+        public string PacketType { get; } = "Uplink";
     }
 }

@@ -4,8 +4,11 @@
     using EasyNetQ;
     using MediatR;
     using Microsoft.Extensions.Logging;
-
     using StorageService.Notifications;
+    using StorageService.Notifications.ReceivedPackets;
+    using StorageService.ReceivedPacketNotifications;
+    using StorageService.ReceivedPacketNotifications.LoRaWanPacketSections;
+
     public class QueueAgent : IQueue
     {
         private IBus _bus;
@@ -31,19 +34,25 @@
         public void OnHandleNotification(QueueTypes.Queues.Storage packet)
         {
             _logger.LogInformation("Received packet {@Packet}", packet);
+            var newPacket = MapFromUplink(packet);
             try
             {
-                _mediator.Publish(new Notification
-                {
-                    Id = 1,
-                    Payload = packet.Packet
-                });
+                _mediator.Publish(new NewPacketNotification { Packet = newPacket });
             }
             catch (Exception e)
             {
                 _logger.LogError("Failed to handle packet {@Packet} with exception {@Exception}", packet, e);
             }
             _logger.LogInformation("Finished handling packet {@Packet}", packet);
+        }
+
+        public NewPacket MapFromUplink(QueueTypes.Queues.Storage packet)
+        {
+            return new NewPacket
+            {
+                
+              
+            };
         }
     }
 }

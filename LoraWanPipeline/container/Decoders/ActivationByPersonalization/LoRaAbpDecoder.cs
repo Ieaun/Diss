@@ -9,6 +9,7 @@
     using LoraWAN_Pipeline.Models.LoRaWanPacketSections;
     using System.Linq;
     using LoraWAN_Pipeline.Notifications.ReceivedPackets;
+    using LoraWAN_Pipeline.Notifications.TransmitPackets;
 
     public class LoRaAbpDecoder
     {
@@ -23,7 +24,7 @@
             this._database = database;
         }
 
-        public async Task<bool> IsRegistedDevice(ReceivedPacketMetadata receivePacket)
+        public async Task<bool> IsRegistedDevice(RecievedPacketMetadata receivePacket)
         {
             var decodedMessage = DecodeMessage(receivePacket.Data);
 
@@ -32,13 +33,15 @@
 
             if (device != null)
             {
-                var packet = new ReceivedPacket {
-                    decodedPacket = decodedMessage,
-                    isRegesteredDevice = true,
-                    metadata = receivePacket
-                };
-
-                await this._queue.EnqueueToStorage(packet);
+                await this._queue.EnqueueToStorage( new NewPacket 
+                { 
+                    PacketType = "Uplink",
+                    Uplink = new ReceivedPacket { 
+                        decodedPacket = decodedMessage,
+                        isRegesteredDevice = true,
+                        metadata = receivePacket
+                    }
+                });
                 return true;
             }
             return false;

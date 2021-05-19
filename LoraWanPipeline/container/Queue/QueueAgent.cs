@@ -55,41 +55,68 @@
             await _bus.PubSub.PublishAsync(notification, handler => handler.WithTopic(nameof(Notification)));
         }
 
-        public async Task EnqueueToUplink(ReceivedPacket receivedPacket)
+        public async Task EnqueueToUplink(NewPacket packet)
         {
-            //var packet = MapToUplinkType(receivedPacket);
-
-            //_logger.Information("Publishing uplink notification {@Notification}", packet);
-            //await _bus.PubSub.PublishAsync(packet, handler => handler.WithTopic(nameof(QueueTypes.Queues.Downlink)));
-        }
-
-        public async Task EnqueueToStorage(ISemtechUdpPacket receivedPacket)
-        {
-            //var packet = MapToStorageType(receivedPacket);
-
-            //_logger.Information("Publishing storage notification {@Notification}", packet);
-            //await _bus.PubSub.PublishAsync(packet, handler => handler.WithTopic(nameof(QueueTypes.Models.LoraPacket)));
-        }
-
-        public QueueTypes.Queues.Uplink MapToUplinkType(ReceivedPacket receivedPacket)
-        {
-            return new QueueTypes.Queues.Uplink
+            var storagePacket = new QueueTypes.Queues.Uplink
             {
-                Packet = new QueueTypes.Models.LoraPacket
-                {
-                    //Payload = receivedPacket.Payload
-                }
+                Packet = MapUplinkToQueueType(packet)
             };
+
+            _logger.Information("Publishing uplink notification {@Notification}", storagePacket);
+            await _bus.PubSub.PublishAsync(storagePacket, handler => handler.WithTopic(nameof(QueueTypes.Queues.Uplink)));
         }
 
-        public QueueTypes.Queues.Storage MapToStorageType(ISemtechUdpPacket receivedPacket)
+        public async Task EnqueueToStorage(NewPacket packet) 
         {
-            return new QueueTypes.Queues.Storage
+            var storagePacket = new QueueTypes.Queues.Storage { 
+                Packet = MapUplinkToQueueType(packet)
+            };
+
+            _logger.Information("Publishing storage notification {@Notification}", storagePacket);
+            await _bus.PubSub.PublishAsync(storagePacket, handler => handler.WithTopic(nameof(QueueTypes.Queues.Storage)));
+        }
+
+        public QueueTypes.Models.NewPacket MapUplinkToQueueType(NewPacket receivedPacket)
+        {
+            return new QueueTypes.Models.NewPacket
             {
-                Packet = new QueueTypes.Models.LoraPacket
-                {
-                    //Payload = receivedPacket.Payload
-                }
+                Uplink = new QueueTypes.Models.ReceivedPackets.ReceivedPacket {
+                    metadata = new QueueTypes.Models.ReceivedPackets.ReceivedPacketsMetadata {
+                        Channel = receivedPacket.Uplink.metadata.Channel,
+                        CodingRate = receivedPacket.Uplink.metadata.CodingRate,
+                        DataRate = receivedPacket.Uplink.metadata.DataRate,
+                        Frequency = receivedPacket.Uplink.metadata.Frequency,
+                        LuminanceSignalToRatio = receivedPacket.Uplink.metadata.LuminanceSignalToRatio,
+                        Modulation = receivedPacket.Uplink.metadata.Modulation,
+                        RadioFrequencyChannel = receivedPacket.Uplink.metadata.RadioFrequencyChannel,
+                        RecievedSignalStrenghtIndicator = receivedPacket.Uplink.metadata.RecievedSignalStrenghtIndicator,
+                        Size = receivedPacket.Uplink.metadata.Size,
+                        Stat = receivedPacket.Uplink.metadata.Stat,
+                        Timestamp = receivedPacket.Uplink.metadata.Timestamp,
+                        Data = receivedPacket.Uplink.metadata.Data
+                    },
+                    isRegesteredDevice = receivedPacket.Uplink.isRegesteredDevice,
+                    decodedPacket = new QueueTypes.Models.DecodedLoraPacket {
+                        PhysicalPayload = new QueueTypes.Models.LoRaWanPacketSections.PhysicalPayload
+                        {
+                            MacHeader = receivedPacket.Uplink.decodedPacket.PhysicalPayload.MacHeader,
+                            MIC = receivedPacket.Uplink.decodedPacket.PhysicalPayload.MIC,
+                            MacPayload = new QueueTypes.Models.LoRaWanPacketSections.MacPayload
+                            {
+                                FramePort = receivedPacket.Uplink.decodedPacket.PhysicalPayload.MacPayload.FramePort,
+                                FramePayload = receivedPacket.Uplink.decodedPacket.PhysicalPayload.MacPayload.FramePayload,
+                                FrameHeader = new QueueTypes.Models.LoRaWanPacketSections.FrameHeader
+                                {
+                                    DeviceAddress = receivedPacket.Uplink.decodedPacket.PhysicalPayload.MacPayload.FrameHeader.DeviceAddress,
+                                    FrameControlOctet = receivedPacket.Uplink.decodedPacket.PhysicalPayload.MacPayload.FrameHeader.FrameControlOctet,
+                                    FrameCounter = receivedPacket.Uplink.decodedPacket.PhysicalPayload.MacPayload.FrameHeader.FrameCounter,
+                                    FrameOptions = receivedPacket.Uplink.decodedPacket.PhysicalPayload.MacPayload.FrameHeader.FrameOptions
+                                }
+                            }
+                        },
+                        OriginalHexString = receivedPacket.Uplink.decodedPacket.OriginalHexString
+                    }
+                }        
             };
         }
     }

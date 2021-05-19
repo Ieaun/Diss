@@ -1,6 +1,6 @@
-﻿namespace LoraWAN_Pipeline.Notifications.GatewayStatusUpdate
+﻿namespace StorageService.Notifications.GatewayStatusUpdates
 {
-    public class GatewayStatusUpdate : ISemtechUdpPacket
+    public class GatewayStatusUpdateMetadata 
     {
         // Descriptions taken from: https://github.com/Lora-net/packet_forwarder/blob/master/PROTOCOL.TXT
 

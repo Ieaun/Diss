@@ -11,11 +11,10 @@
     using Microsoft.Extensions.Configuration;
     using MongoDB.Driver;
     using LoraWAN_Pipeline.Udp;
-    using LoraWAN_Pipeline.Notifications.GatewayStatusUpdate;
-    using LoraWAN_Pipeline.Notifications.TransmitPacket;
     using LoraWAN_Pipeline.Notifications.ReceivedPackets;
     using LoraWAN_Pipeline.ActivationByPersonalization.Decoders;
-    using LoraWAN_Pipeline.Decoders.ActivationByPersonalization;
+    using LoraWAN_Pipeline.Notifications.GatewayStatusUpdates;
+    using LoraWAN_Pipeline.Notifications.TransmitPackets;
 
     public static class ServiceCollectionExtensions
     {
@@ -33,7 +32,6 @@
             services.AddSingleton<ReceivedPacketMapper>();
             services.AddSingleton<TransmitPacketMapper>();
             services.AddSingleton<LoRaAbpDecoder>();
-            services.AddSingleton<AbpValidator>();
 
             return services;
         }

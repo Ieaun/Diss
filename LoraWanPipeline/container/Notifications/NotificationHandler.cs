@@ -8,13 +8,12 @@
     using MediatR;
     using Microsoft.Extensions.Logging;
     using Newtonsoft.Json.Linq;
-    using LoraWAN_Pipeline.Notifications.GatewayStatusUpdate;
-    using LoraWAN_Pipeline.Models;
-    using LoraWAN_Pipeline.Notifications.TransmitPacket;
     using LoraWAN_Pipeline.ActivationByPersonalization.Decoders;
     using Newtonsoft.Json;
     using System.Collections.Generic;
     using LoraWAN_Pipeline.Notifications.ReceivedPackets;
+    using LoraWAN_Pipeline.Notifications.GatewayStatusUpdates;
+    using LoraWAN_Pipeline.Notifications.TransmitPackets;
 
     public class NotificationHandler : INotificationHandler<Notification>
     {
@@ -59,7 +58,7 @@
                     case "rxpk":
                         sanitizedData = sanitizedData.Remove(0, sanitizedData.IndexOf('['));
                         sanitizedData = sanitizedData.Remove(sanitizedData.Length -1, 1);
-                        var receivedPacketsMetadata = JsonConvert.DeserializeObject<List<ReceivedPacketMetadata>>(sanitizedData);
+                        var receivedPacketsMetadata = JsonConvert.DeserializeObject<List<RecievedPacketMetadata>>(sanitizedData);
 
                         foreach (var receivePacket in receivedPacketsMetadata)
                         {
@@ -67,7 +66,14 @@
                             // sends to storage service here if true
                             var isRegesteredDevice = await _loRaAbpDecoder.IsRegistedDevice(receivePacket);
                             
-                            await this._queue.EnqueueToUplink(new ReceivedPacket { isRegesteredDevice = isRegesteredDevice,metadata = receivePacket });
+                            await this._queue.EnqueueToUplink(new NewPacket
+                            {
+                                PacketType = "Uplink",
+                                Uplink = new ReceivedPacket
+                                {
+                                    isRegesteredDevice = isRegesteredDevice, //need original message 
+                                }
+                            });
                         }
 
                         break;

@@ -1,4 +1,4 @@
-﻿namespace StorageService.Notifications
+﻿namespace StorageService.Notifications.ReceivedPacketNotifications
 {
     using System;
     using System.Threading;
@@ -7,22 +7,22 @@
     using Microsoft.Extensions.Logging;
     using StorageService.Database;
 
-    public class NotificationHandler : INotificationHandler<Notification>
+    public class ReceivedPacketNotificationHandler : INotificationHandler<NewPacketNotification>
     {
-        private ILogger<NotificationHandler> _logger;
+        private ILogger<ReceivedPacketNotificationHandler> _logger;
         private IDatabase _database;
-        public NotificationHandler(ILogger<NotificationHandler> logger, IDatabase database)
+        public ReceivedPacketNotificationHandler(ILogger<ReceivedPacketNotificationHandler> logger, IDatabase database)
         {
             this._logger = logger;
             this._database = database;
         }
 
-        public Task Handle(Notification notification, CancellationToken cancellationToken)
+        public Task Handle(NewPacketNotification notification, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Received new notification :{@Notification}", notification);
             try
             {
-                _database.Create(new StubObject());
+                //_database.Create();
             }
             catch (Exception e)
             {

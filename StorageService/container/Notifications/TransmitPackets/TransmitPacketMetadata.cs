@@ -1,6 +1,8 @@
-﻿namespace LoraWAN_Pipeline.Notifications.TransmitPacket
+﻿namespace StorageService.Notifications.TransmitPackets
 {
-    public class TransmitPacket : ISemtechUdpPacket
+    using Newtonsoft.Json;
+
+    public class TransmitPacketMetadata
     {
         public string Time { get; set; }
 
