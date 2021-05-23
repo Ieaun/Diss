@@ -21,18 +21,29 @@
         private IMongoCollection<RegisteredDevice> GetCollection() => _mongoClient.GetDatabase($"{nameof(RegisteredDevice)}").GetCollection<RegisteredDevice>($"{nameof(RegisteredDevice)}");
 
         public async Task Create(RegisteredDevice registeredDevice)
-        {
+        {           
             _logger.LogDebug("Create request, creating: {@registeredDevice}", registeredDevice);
             var collection = GetCollection();
             await collection.InsertOneAsync(registeredDevice);
-
         }
-        public async Task<RegisteredDevice> Get(string DeviceAddress)
+
+        public async Task<RegisteredDevice> Get(int Id)
         {
-            _logger.LogDebug("Get request, Device Address: {@DeviceAddress}", DeviceAddress);
+            _logger.LogDebug("Get request, Device Id: {@Id}", Id);
             var collection = GetCollection();
 
-            var filter = Builders<RegisteredDevice>.Filter.Where(x => x.DeviceAddress == DeviceAddress);
+            var filter = Builders<RegisteredDevice>.Filter.Where(x => x.Id == Id);
+
+            var device = collection.Find(filter).FirstOrDefault();
+            return device;
+        }
+
+        public async Task<RegisteredDevice> Get(string deviceAddress)
+        {
+            _logger.LogDebug("Get request, Device address: {@deviceAddress}", deviceAddress);
+            var collection = GetCollection();
+
+            var filter = Builders<RegisteredDevice>.Filter.Where(x => x.DeviceAddress == deviceAddress);
 
             var device = collection.Find(filter).FirstOrDefault();
             return device;
@@ -46,11 +57,11 @@
             return device;
         }
 
-        public async Task Delete(RegisteredDevice registeredDevice)
+        public async Task Delete(int Id)
         {
-            _logger.LogDebug("Delete request, deleting: {@registeredDevice}", registeredDevice);
+            _logger.LogDebug("Delete request, deleting: {@Id}", Id);
             var collection = GetCollection();
-            var filter = Builders<RegisteredDevice>.Filter.Eq("DeviceAddress", registeredDevice.DeviceAddress);
+            var filter = Builders<RegisteredDevice>.Filter.Eq("Id", Id);
             await collection.DeleteOneAsync(filter);
         }
 

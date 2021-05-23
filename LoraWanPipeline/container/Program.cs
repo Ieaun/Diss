@@ -17,15 +17,15 @@ namespace LoraWAN_Pipeline
                 .File(Path.Join(asmLocation, "log.txt")).CreateLogger();
 
             Log.Logger.Information("Starting container");
-            //try
-            //{
+            try
+            {
                 CreateHostBuilder(args).Build().Run();
-            //}
-            //catch (Exception e)
-            //{
-             //   Log.Logger.Information("Fatal shutdown {@Exception}", e);
-             //   return;
-            //}
+            }
+            catch (Exception e)
+            {
+                Log.Logger.Information("Fatal shutdown {@Exception}", e);
+                return;
+            }
             Log.Logger.Information("Graceful shutdown");
         }
 

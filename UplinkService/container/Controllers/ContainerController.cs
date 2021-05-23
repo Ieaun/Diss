@@ -6,6 +6,7 @@
     using System.Threading.Tasks;
     using UplinkService.Database;
     using System;
+    using UplinkService.Models.Servers;
 
     [ApiController]
     [Route("api/[controller]")]
@@ -21,8 +22,8 @@
         }
 
         [HttpPost]
-        [Route("/Create/")]
-        public async Task<ActionResult> Create(StubObject packet)
+        [Route("Uplink/Create/")]
+        public async Task<ActionResult> Create(Server packet)
         {
             try
             {
@@ -37,7 +38,8 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult<StubObject>> Get(int id)
+        [Route("Uplink/Get/")]
+        public async Task<ActionResult<Server>> Get(int id)
         {
             var foundObject = await _database.Get(id);
             return foundObject == null ? NotFound(): Ok(foundObject);
@@ -45,16 +47,16 @@
 
         
         [HttpGet]
-        [Route("/GetAll")]
-        public async Task<ActionResult<List<StubObject>>> GetAll()
+        [Route("Uplink/GetAll")]
+        public async Task<ActionResult<List<Server>>> GetAll()
         {
-            var stubObjectsList = await _database.GetAll();
-            return stubObjectsList.Count == 0 ? NotFound() : Ok(stubObjectsList);
+            var serverList = await _database.GetAll();
+            return serverList.Count == 0 ? NotFound() : Ok(serverList);
         }
 
         [HttpPost]
-        [Route("/Update/")]
-        public async Task<ActionResult> Update(StubObject packet)
+        [Route("Uplink/Update/")]
+        public async Task<ActionResult> Update(Server packet)
         {
             try
             {
@@ -69,8 +71,8 @@
         }
 
         [HttpPost]
-        [Route("/Delete/")]
-        public async Task<ActionResult> Delete(StubObject packet)
+        [Route("Uplink/Delete/")]
+        public async Task<ActionResult> Delete(Server packet)
         {
             try
             {

@@ -3,33 +3,88 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Net;
+    using System.Text.Json;
     using System.Threading;
     using System.Threading.Tasks;
     using MediatR;
     using Microsoft.Extensions.Logging;
+    using Microsoft.Extensions.Options;
+    using UplinkService.Config;
+    using UplinkService.Database;
+    using UplinkService.Udp;
+
     public class NotificationHandler : INotificationHandler<Notification>
     {
-        private ILogger<NotificationHandler> logger;
-        public NotificationHandler(ILogger<NotificationHandler> logger)
+        private readonly ILogger<NotificationHandler> _Logger;
+        private string _PriorityServerIP;
+        private int _PriorityServerPort;
+        private bool _SendToAllServers;
+        private string _TtnIP;
+        private int _TtnPort;
+        private bool _OnlySendToTtn;
+        private readonly IDatabase _Database;
+        private readonly IUdpHandler _UdpHandler;
+
+        public NotificationHandler(ILogger<NotificationHandler> logger, IOptions<ContainerSettings> options, IDatabase database, IUdpHandler udpHandler)
         {
-            this.logger = logger;
+            this._Logger = logger;
+            this._UdpHandler = udpHandler;
+            this._PriorityServerIP = options.Value.PriorityServerIP;
+            this._PriorityServerPort = int.Parse(options.Value.PriorityServerPort);
+            this._SendToAllServers = bool.Parse(options.Value.SendToAllServers);
+            this._TtnIP = options.Value.TtnIP == "" ? Dns.GetHostEntry(options.Value.TtnRouter).AddressList[0].ToString() : options.Value.TtnIP;
+            this._TtnPort = int.Parse(options.Value.TtnPort);
+            this._OnlySendToTtn = bool.Parse(options.Value.OnlySendToTtn);
         }
 
-        public Task Handle(Notification notification, CancellationToken cancellationToken)
+        public string SerializePacket(Notification notification) {
+            switch (notification.PacketType)
+            {
+                case "stat":
+                    return "{stat:" + Newtonsoft.Json.JsonConvert.SerializeObject(notification.GsMetadata) + "}";
+                case "rxpk":
+                    return "{rxpk:[" + Newtonsoft.Json.JsonConvert.SerializeObject(notification.RxMetadata) + "]}";
+                default:
+                    throw new Exception("Unrecognized packet type " + notification.PacketType);
+            }
+        }
+
+        public async Task Handle(Notification notification, CancellationToken cancellationToken)
         {
-            logger.LogInformation("Recieved new notification :{@Notification}", notification);
+            _Logger.LogInformation("Recieved new notification :{@Notification}", notification);
             try
             {
+                var serializedPacket = string.IsNullOrWhiteSpace(notification.OriginalPacket) ? SerializePacket(notification) : notification.OriginalPacket;  
+                
+                // send to private server(s)
+                if ((notification.isRegesteredDevice || notification.PacketType == "stat") && !_OnlySendToTtn)
+                {
+                    if (_SendToAllServers)
+                    {
+                        var servers = await _Database.GetAll();
+                        servers.ForEach(x => _UdpHandler.Send(x.IpAddress, x.Port, JsonSerializer.SerializeToUtf8Bytes(serializedPacket)));
+                    }
+                    else
+                    {
+                        _UdpHandler.Send(_PriorityServerIP, _PriorityServerPort, JsonSerializer.SerializeToUtf8Bytes(serializedPacket));
+                    }
+                }
 
+                // send to the things network
+                if ( !notification.isRegesteredDevice || notification.PacketType == "stat") {
+                    _UdpHandler.Send(_TtnIP, _TtnPort, JsonSerializer.SerializeToUtf8Bytes(serializedPacket));
+                }                
+                
             }
             catch (Exception e)
             {
-                logger.LogInformation("Failed processing notification :{@Notification} with exception: {@Exception}", notification, e.Message);
-                return Task.CompletedTask;
+                _Logger.LogInformation("Failed processing notification :{@Notification} with exception: {@Exception}", notification, e.Message);
+                return;
             }
 
-            logger.LogInformation("Finished processing notification :{@Notification}", notification);
-            return Task.CompletedTask;
+            _Logger.LogInformation("Finished processing notification :{@Notification}", notification);
+            return;
         }
     }
 }

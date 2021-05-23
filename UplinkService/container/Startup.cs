@@ -6,7 +6,10 @@ namespace UplinkService
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using Microsoft.OpenApi.Models;
+    using UplinkService.Config;
     using UplinkService.Extensions;
+    using UplinkService.Udp;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -22,7 +25,7 @@ namespace UplinkService
             services.AddContainerService();
             services.AddContainerDataAccessLayer(Configuration);
             services.AddLogging();
-            //services.AddOptions<ContainerSettings>().Bind(Configuration.GetSection("ConnectionStrings"));
+            services.AddOptions<ContainerSettings>().Bind(Configuration.GetSection("Configuration"));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -37,6 +40,8 @@ namespace UplinkService
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.ApplicationServices.GetService<IUdpHandler>().Start();
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>

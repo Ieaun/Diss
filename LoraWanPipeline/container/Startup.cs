@@ -25,7 +25,6 @@ namespace LoraWAN_Pipeline
             services.AddContainerService();
             services.AddContainerDataAccessLayer(Configuration);
             services.AddLogging();
-            //services.AddOptions<ContainerSettings>().Bind(Configuration.GetSection("ConnectionStrings"));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

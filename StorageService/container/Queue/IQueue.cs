@@ -2,6 +2,6 @@
 {
     public interface IQueue
     {
-       void OnHandleNotification(QueueTypes.Queues.Storage packet);
+       void OnHandleNotification(QueueTypes.Queues.Storages.Storage packet);
     }
 }

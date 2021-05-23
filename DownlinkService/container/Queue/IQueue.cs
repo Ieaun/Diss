@@ -2,6 +2,6 @@
 {
     public interface IQueue
     {
-       void OnHandleNotification(QueueTypes.Queues.Downlink packet);
+       void OnHandleNotification(QueueTypes.Queues.Downlinks.Downlink packet);
     }
 }

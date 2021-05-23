@@ -22,16 +22,16 @@
             this._bus = bus;
 
             //this WILL throw an error if rabbit mq is not running. Rabbit mq must be running.
-            this._bus.PubSub.Subscribe<QueueTypes.Queues.Storage>("Storage", OnHandleNotification, x=> x.WithTopic(nameof(QueueTypes.Queues.Storage)));
+            this._bus.PubSub.Subscribe<QueueTypes.Queues.Storages.Storage>("Storage", OnHandleNotification, x=> x.WithTopic(nameof(QueueTypes.Queues.Storages.Storage)));
             this._bus.Advanced.Connected += OnConnected;
         }
 
         private void OnConnected(object sender, ConnectedEventArgs e)
         {
-            _bus.PubSub.Subscribe<QueueTypes.Queues.Storage>("Storage", OnHandleNotification, x => x.WithTopic(nameof(QueueTypes.Queues.Storage)));
+            _bus.PubSub.Subscribe<QueueTypes.Queues.Storages.Storage>("Storage", OnHandleNotification, x => x.WithTopic(nameof(QueueTypes.Queues.Storages.Storage)));
         }
 
-        public void OnHandleNotification(QueueTypes.Queues.Storage packet)
+        public void OnHandleNotification(QueueTypes.Queues.Storages.Storage packet)
         {
             _logger.LogInformation("Received packet {@Packet}", packet);
             var newPacket = MapFromUplink(packet);
@@ -46,7 +46,7 @@
             _logger.LogInformation("Finished handling packet {@Packet}", packet);
         }
 
-        public NewPacket MapFromUplink(QueueTypes.Queues.Storage packet)
+        public NewPacket MapFromUplink(QueueTypes.Queues.Storages.Storage packet)
         {
             return new NewPacket
             {

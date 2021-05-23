@@ -8,7 +8,7 @@
 
         // e.g. 238504441
         [JsonProperty("tmst")]
-        public int Timestamp { get; set; }
+        public double Timestamp { get; set; }
 
         // e.g. 868.1
         // RX central frequency in MHz (unsigned float, Hz precision)

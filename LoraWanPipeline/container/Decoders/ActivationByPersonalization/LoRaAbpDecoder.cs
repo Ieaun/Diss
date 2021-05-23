@@ -28,15 +28,15 @@
         {
             var decodedMessage = DecodeMessage(receivePacket.Data);
 
-            // check mif it matches any device addresses we have 
-            var device = _database.Get(decodedMessage.PhysicalPayload.MacPayload.FrameHeader.DeviceAddress);
+            // check if it matches any device addresses we have 
+            var device = await _database.Get(decodedMessage.PhysicalPayload.MacPayload.FrameHeader.DeviceAddress);
 
             if (device != null)
             {
                 await this._queue.EnqueueToStorage( new NewPacket 
                 { 
                     PacketType = "Uplink",
-                    Uplink = new ReceivedPacket { 
+                    RxPacket = new ReceivedPacket { 
                         decodedPacket = decodedMessage,
                         isRegesteredDevice = true,
                         metadata = receivePacket

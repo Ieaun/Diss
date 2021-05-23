@@ -3,11 +3,9 @@
 
     public class GatewayStatusUpdate : ISemtechUdpPacket
     {
-        public GatewayStatusUpdate metadata { get; set; }
+        public GatewayStatusUpdateMetadata metadata { get; set; }
 
-        public DecodedLoraPacket decodedPacket { get; set; }
-
-        public bool isRegesteredDevice { get; set; }
+        public string OriginalMessage { get; set; }
 
         public string PacketType { get; } = "Status";
     }

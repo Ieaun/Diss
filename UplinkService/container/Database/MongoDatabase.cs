@@ -5,6 +5,8 @@
     using System.Threading.Tasks;
     using UplinkService;
     using Microsoft.Extensions.Logging;
+    using UplinkService.Models.ReceivedPackets;
+    using UplinkService.Models.Servers;
 
     public class MongoDatabase : IDatabase
     {
@@ -17,45 +19,47 @@
             this._mongoClient = mongoClient;
         }
 
-        public async Task Create(StubObject stubObject)
+        private IMongoCollection<Server> GetCollection() => _mongoClient.GetDatabase($"{nameof(Server)}").GetCollection<Server>($"{nameof(Server)}");
+
+        public async Task Create(Server serverObject)
         {
-            _logger.LogDebug("Create request, creating: {@stubObject}", stubObject);
-            var collection = _mongoClient.GetDatabase($"{nameof(StubObject)}").GetCollection<StubObject>($"{nameof(StubObject)}");
-            await collection.InsertOneAsync(stubObject);
+            _logger.LogDebug("Create request, creating: {@Server}", serverObject);
+            var collection = GetCollection();
+            await collection.InsertOneAsync(serverObject);
 
         }
-        public async Task<StubObject> Get(int id)
+        public async Task<Server> Get(int id)
         {
             _logger.LogDebug("Get request, id: {@Id}", id);
-            var collection = _mongoClient.GetDatabase($"{nameof(StubObject)}").GetCollection<StubObject>($"{nameof(StubObject)}");
+            var collection = GetCollection();
 
-            var filter = Builders<StubObject>.Filter.Where(x=> x.Id == id);
+            var filter = Builders<Server>.Filter.Where(x=> x.Id == id);
 
-            var stubObject = collection.Find(filter).FirstOrDefault();
-            return stubObject;
+            var serverObject = collection.Find(filter).FirstOrDefault();
+            return serverObject;
         }
 
-        public async Task<List<StubObject>> GetAll()
+        public async Task<List<Server>> GetAll()
         {
             _logger.LogDebug("GetAll request");
-            var collection = _mongoClient.GetDatabase($"{nameof(StubObject)}").GetCollection<StubObject>($"{nameof(StubObject)}");
-            var stubObjects = await collection.Find(_ => true).ToListAsync();
-            return stubObjects;
+            var collection = GetCollection();
+            var serverObjects = await collection.Find(_ => true).ToListAsync();
+            return serverObjects;
         }
 
-        public async Task Delete(StubObject stubObject)
+        public async Task Delete(Server serverObject)
         {
-            _logger.LogDebug("Delete request, deleting: {@StubObject}", stubObject);
-            var collection = _mongoClient.GetDatabase($"{nameof(StubObject)}").GetCollection<StubObject>($"{nameof(StubObject)}");
-            var filter = Builders<StubObject>.Filter.Eq("Id", stubObject.Id);
+            _logger.LogDebug("Delete request, deleting: {@Server}", serverObject);
+            var collection = GetCollection();
+            var filter = Builders<Server>.Filter.Eq("Id", serverObject.Id);
             await collection.DeleteOneAsync(filter);
         }
 
-        public async Task Update(StubObject stubObject)
+        public async Task Update(Server serverObject)
         {
-            _logger.LogDebug("Update request, update: {@StubObject}", stubObject);
-            var collection = _mongoClient.GetDatabase($"{nameof(StubObject)}").GetCollection<StubObject>($"{nameof(StubObject)}");
-            await collection.ReplaceOneAsync(doc => doc.Id == stubObject.Id, stubObject);
+            _logger.LogDebug("Update request, update: {@Server}", serverObject);
+            var collection = GetCollection();
+            await collection.ReplaceOneAsync(doc => doc.Id == serverObject.Id, serverObject);
         }
     }
 }

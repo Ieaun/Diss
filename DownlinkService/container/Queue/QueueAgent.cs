@@ -19,16 +19,16 @@
             this._bus = bus;
 
             //this WILL throw an error if rabbit mq is not running. Rabbit mq must be running.
-            this._bus.PubSub.Subscribe<QueueTypes.Queues.Downlink>("Downlink", OnHandleNotification, x=> x.WithTopic(nameof(QueueTypes.Queues.Downlink)));
+            this._bus.PubSub.Subscribe<QueueTypes.Queues.Downlinks.Downlink>("Downlink", OnHandleNotification, x=> x.WithTopic(nameof(QueueTypes.Queues.Downlinks.Downlink)));
             this._bus.Advanced.Connected += OnConnected;
         }
 
         private void OnConnected(object sender, ConnectedEventArgs e)
         {
-            _bus.PubSub.Subscribe<QueueTypes.Queues.Downlink>("Downlink", OnHandleNotification, x => x.WithTopic(nameof(QueueTypes.Queues.Downlink)));
+            _bus.PubSub.Subscribe<QueueTypes.Queues.Downlinks.Downlink>("Downlink", OnHandleNotification, x => x.WithTopic(nameof(QueueTypes.Queues.Downlinks.Downlink)));
         }
 
-        public void OnHandleNotification(QueueTypes.Queues.Downlink packet)
+        public void OnHandleNotification(QueueTypes.Queues.Downlinks.Downlink packet)
         {
             _logger.Information("Received packet {@Packet}", packet);
             try

@@ -1,4 +1,4 @@
-﻿namespace QueueTypes.Queues
+﻿namespace QueueTypes.Queues.Downlinks
 {
     using EasyNetQ;
     using QueueTypes.Models;

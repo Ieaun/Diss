@@ -23,23 +23,23 @@
             this._bus = bus;
 
             //this WILL throw an error if rabbit mq is not running. Rabbit mq must be running. 
-            this._bus.PubSub.Subscribe<QueueTypes.Queues.Downlink>("Downlink", OnNotificationReceived, x=> x.WithTopic(nameof(QueueTypes.Queues.Downlink)));
+            this._bus.PubSub.Subscribe<QueueTypes.Queues.Downlinks.Downlink>("Downlink", OnNotificationReceived, x=> x.WithTopic(nameof(QueueTypes.Queues.Downlinks.Downlink)));
             this._bus.Advanced.Connected += OnConnected;
         }
 
         private void OnConnected(object sender, ConnectedEventArgs e)
         {
-            _bus.PubSub.Subscribe<QueueTypes.Queues.Downlink>("Downlink", OnNotificationReceived, x => x.WithTopic(nameof(QueueTypes.Queues.Downlink)));
+            _bus.PubSub.Subscribe<QueueTypes.Queues.Downlinks.Downlink>("Downlink", OnNotificationReceived, x => x.WithTopic(nameof(QueueTypes.Queues.Downlinks.Downlink)));
         }
 
-        private void OnNotificationReceived(QueueTypes.Queues.Downlink packet)
+        private void OnNotificationReceived(QueueTypes.Queues.Downlinks.Downlink packet)
         {
             _logger.Information("Received packet {@Packet}", packet);
             try
             {
                 _mediator.Publish(new Notification
                 {
-                    datagram = null //packet.Packet
+                    // TODO: Handle downlink here
                 });
             }
             catch (Exception e)
@@ -57,23 +57,58 @@
 
         public async Task EnqueueToUplink(NewPacket packet)
         {
-            var storagePacket = new QueueTypes.Queues.Uplink
-            {
-                Packet = MapUplinkToQueueType(packet)
-            };
+            QueueTypes.Queues.Uplinks.Uplink uplinkPacket = null;
 
-            _logger.Information("Publishing uplink notification {@Notification}", storagePacket);
-            await _bus.PubSub.PublishAsync(storagePacket, handler => handler.WithTopic(nameof(QueueTypes.Queues.Uplink)));
+            if (packet.PacketType == "rxpk") {
+                uplinkPacket = new QueueTypes.Queues.Uplinks.Uplink
+                {
+                    PacketType = "rxpk",
+                    isRegesteredDevice = packet.RxPacket.isRegesteredDevice,
+                    RxPacket = new QueueTypes.Models.ReceivedPackets.ReceivedPacket
+                    {
+                        metadata = new QueueTypes.Models.ReceivedPackets.ReceivedPacketsMetadata {
+                            Channel = packet.RxPacket.metadata.Channel,
+                            CodingRate = packet.RxPacket.metadata.CodingRate,
+                            Data = packet.RxPacket.metadata.Data,
+                            DataRate = packet.RxPacket.metadata.DataRate,
+                            Frequency = packet.RxPacket.metadata.Frequency,
+                            LuminanceSignalToRatio = packet.RxPacket.metadata.LuminanceSignalToRatio,
+                            Modulation = packet.RxPacket.metadata.Modulation,
+                            Size = packet.RxPacket.metadata.Size,
+                            Timestamp = packet.RxPacket.metadata.Timestamp,
+                            RecievedSignalStrenghtIndicator = packet.RxPacket.metadata.RecievedSignalStrenghtIndicator,
+                            RadioFrequencyChannel = packet.RxPacket.metadata.RadioFrequencyChannel,
+                            Stat = packet.RxPacket.metadata.Stat
+                        }               
+                    }
+                };
+            }
+
+            if (packet.PacketType == "stat")
+            {
+                uplinkPacket = new QueueTypes.Queues.Uplinks.Uplink
+                {
+                    PacketType = "stat",
+                    GsPacket = new QueueTypes.Models.GatewayStatusUpdates.GatewayStatusUpdate
+                    {
+                        OriginalMessage = packet.StatPacket.OriginalMessage
+                    }
+                };
+            }
+
+            _logger.Information("Publishing uplink notification {@Notification}", uplinkPacket);
+
+            await _bus.PubSub.PublishAsync(uplinkPacket, handler => handler.WithTopic(nameof(QueueTypes.Queues.Uplinks.Uplink)));
         }
 
         public async Task EnqueueToStorage(NewPacket packet) 
         {
-            var storagePacket = new QueueTypes.Queues.Storage { 
+            var storagePacket = new QueueTypes.Queues.Storages.Storage { 
                 Packet = MapUplinkToQueueType(packet)
             };
 
             _logger.Information("Publishing storage notification {@Notification}", storagePacket);
-            await _bus.PubSub.PublishAsync(storagePacket, handler => handler.WithTopic(nameof(QueueTypes.Queues.Storage)));
+            await _bus.PubSub.PublishAsync(storagePacket, handler => handler.WithTopic(nameof(QueueTypes.Queues.Storages.Storage)));
         }
 
         public QueueTypes.Models.NewPacket MapUplinkToQueueType(NewPacket receivedPacket)
@@ -82,39 +117,39 @@
             {
                 Uplink = new QueueTypes.Models.ReceivedPackets.ReceivedPacket {
                     metadata = new QueueTypes.Models.ReceivedPackets.ReceivedPacketsMetadata {
-                        Channel = receivedPacket.Uplink.metadata.Channel,
-                        CodingRate = receivedPacket.Uplink.metadata.CodingRate,
-                        DataRate = receivedPacket.Uplink.metadata.DataRate,
-                        Frequency = receivedPacket.Uplink.metadata.Frequency,
-                        LuminanceSignalToRatio = receivedPacket.Uplink.metadata.LuminanceSignalToRatio,
-                        Modulation = receivedPacket.Uplink.metadata.Modulation,
-                        RadioFrequencyChannel = receivedPacket.Uplink.metadata.RadioFrequencyChannel,
-                        RecievedSignalStrenghtIndicator = receivedPacket.Uplink.metadata.RecievedSignalStrenghtIndicator,
-                        Size = receivedPacket.Uplink.metadata.Size,
-                        Stat = receivedPacket.Uplink.metadata.Stat,
-                        Timestamp = receivedPacket.Uplink.metadata.Timestamp,
-                        Data = receivedPacket.Uplink.metadata.Data
+                        Channel = receivedPacket.RxPacket.metadata.Channel,
+                        CodingRate = receivedPacket.RxPacket.metadata.CodingRate,
+                        DataRate = receivedPacket.RxPacket.metadata.DataRate,
+                        Frequency = receivedPacket.RxPacket.metadata.Frequency,
+                        LuminanceSignalToRatio = receivedPacket.RxPacket.metadata.LuminanceSignalToRatio,
+                        Modulation = receivedPacket.RxPacket.metadata.Modulation,
+                        RadioFrequencyChannel = receivedPacket.RxPacket.metadata.RadioFrequencyChannel,
+                        RecievedSignalStrenghtIndicator = receivedPacket.RxPacket.metadata.RecievedSignalStrenghtIndicator,
+                        Size = receivedPacket.RxPacket.metadata.Size,
+                        Stat = receivedPacket.RxPacket.metadata.Stat,
+                        Timestamp = receivedPacket.RxPacket.metadata.Timestamp,
+                        Data = receivedPacket.RxPacket.metadata.Data
                     },
-                    isRegesteredDevice = receivedPacket.Uplink.isRegesteredDevice,
+                    isRegesteredDevice = receivedPacket.RxPacket.isRegesteredDevice,
                     decodedPacket = new QueueTypes.Models.DecodedLoraPacket {
                         PhysicalPayload = new QueueTypes.Models.LoRaWanPacketSections.PhysicalPayload
                         {
-                            MacHeader = receivedPacket.Uplink.decodedPacket.PhysicalPayload.MacHeader,
-                            MIC = receivedPacket.Uplink.decodedPacket.PhysicalPayload.MIC,
+                            MacHeader = receivedPacket.RxPacket.decodedPacket.PhysicalPayload.MacHeader,
+                            MIC = receivedPacket.RxPacket.decodedPacket.PhysicalPayload.MIC,
                             MacPayload = new QueueTypes.Models.LoRaWanPacketSections.MacPayload
                             {
-                                FramePort = receivedPacket.Uplink.decodedPacket.PhysicalPayload.MacPayload.FramePort,
-                                FramePayload = receivedPacket.Uplink.decodedPacket.PhysicalPayload.MacPayload.FramePayload,
+                                FramePort = receivedPacket.RxPacket.decodedPacket.PhysicalPayload.MacPayload.FramePort,
+                                FramePayload = receivedPacket.RxPacket.decodedPacket.PhysicalPayload.MacPayload.FramePayload,
                                 FrameHeader = new QueueTypes.Models.LoRaWanPacketSections.FrameHeader
                                 {
-                                    DeviceAddress = receivedPacket.Uplink.decodedPacket.PhysicalPayload.MacPayload.FrameHeader.DeviceAddress,
-                                    FrameControlOctet = receivedPacket.Uplink.decodedPacket.PhysicalPayload.MacPayload.FrameHeader.FrameControlOctet,
-                                    FrameCounter = receivedPacket.Uplink.decodedPacket.PhysicalPayload.MacPayload.FrameHeader.FrameCounter,
-                                    FrameOptions = receivedPacket.Uplink.decodedPacket.PhysicalPayload.MacPayload.FrameHeader.FrameOptions
+                                    DeviceAddress = receivedPacket.RxPacket.decodedPacket.PhysicalPayload.MacPayload.FrameHeader.DeviceAddress,
+                                    FrameControlOctet = receivedPacket.RxPacket.decodedPacket.PhysicalPayload.MacPayload.FrameHeader.FrameControlOctet,
+                                    FrameCounter = receivedPacket.RxPacket.decodedPacket.PhysicalPayload.MacPayload.FrameHeader.FrameCounter,
+                                    FrameOptions = receivedPacket.RxPacket.decodedPacket.PhysicalPayload.MacPayload.FrameHeader.FrameOptions
                                 }
                             }
                         },
-                        OriginalHexString = receivedPacket.Uplink.decodedPacket.OriginalHexString
+                        OriginalHexString = receivedPacket.RxPacket.decodedPacket.OriginalHexString
                     }
                 }        
             };

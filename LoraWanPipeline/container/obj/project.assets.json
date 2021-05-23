@@ -851,6 +851,7 @@
           "Serilog": "2.10.0",
           "Serilog.Sinks.Console": "3.1.1",
           "Serilog.Sinks.File": "4.1.0",
+          "SimpleUdp": "1.0.0.4",
           "SuperSimpleTcp": "2.4.0",
           "Swashbuckle.AspNetCore": "5.6.3"
         },

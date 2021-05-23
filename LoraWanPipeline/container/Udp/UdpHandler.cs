@@ -27,7 +27,6 @@
             _endPoint = new UdpEndpoint("192.168.8.100", 30099);
             _endPoint.EndpointDetected += EndpointDetected;
 
-            // only if you want to receive messages...
             _endPoint.DatagramReceived += DatagramReceived;
         }
 
@@ -51,7 +50,6 @@
 
         public void Send(string address, int port, string message)
         {
-            // send a message...
             _endPoint.Send(address, port, message);
         }
 

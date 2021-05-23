@@ -6,6 +6,7 @@
     using System.Threading.Tasks;
     using StorageService.Database;
     using System;
+    using StorageService.Notifications.ReceivedPackets;
 
     [ApiController]
     [Route("api/[controller]")]
@@ -21,8 +22,8 @@
         }
 
         [HttpPost]
-        [Route("/Create/")]
-        public async Task<ActionResult> Create(StubObject packet)
+        [Route("Storage/Create/")]
+        public async Task<ActionResult> Create(NewPacket packet)
         {
             try
             {
@@ -37,7 +38,8 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult<StubObject>> Get(int id)
+        [Route("Storage/Get/")]
+        public async Task<ActionResult<NewPacket>> Get(int id)
         {
             var foundObject = await _database.Get(id);
             return foundObject == null ? NotFound(): Ok(foundObject);
@@ -45,16 +47,16 @@
 
         
         [HttpGet]
-        [Route("/GetAll")]
-        public async Task<ActionResult<List<StubObject>>> GetAll()
+        [Route("Storage/GetAll")]
+        public async Task<ActionResult<List<NewPacket>>> GetAll()
         {
             var stubObjectsList = await _database.GetAll();
             return stubObjectsList.Count == 0 ? NotFound() : Ok(stubObjectsList);
         }
 
         [HttpPost]
-        [Route("/Update/")]
-        public async Task<ActionResult> Update(StubObject packet)
+        [Route("Storage/Update/")]
+        public async Task<ActionResult> Update(NewPacket packet)
         {
             try
             {
@@ -69,8 +71,8 @@
         }
 
         [HttpPost]
-        [Route("/Delete/")]
-        public async Task<ActionResult> Delete(StubObject packet)
+        [Route("Storage/Delete/")]
+        public async Task<ActionResult> Delete(NewPacket packet)
         {
             try
             {

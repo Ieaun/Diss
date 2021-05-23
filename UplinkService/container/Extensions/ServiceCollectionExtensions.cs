@@ -9,6 +9,7 @@
     using UplinkService.Database;
     using Microsoft.Extensions.Configuration;
     using MongoDB.Driver;
+    using UplinkService.Udp;
 
     public static class ServiceCollectionExtensions
     {
@@ -28,6 +29,7 @@
         {
             services.RegisterEasyNetQ(configuration.GetConnectionString("Queue"));
             services.AddSingleton<IQueue,QueueAgent>();
+            services.AddSingleton<IUdpHandler, UdpHandler>();
 
             services.AddSingleton(new MongoClient(configuration.GetConnectionString("MongoDb")));
             services.AddSingleton<IDatabase, MongoDatabase>();

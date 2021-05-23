@@ -19,11 +19,9 @@
             var Size = int.Parse(jsonObj.First.First["size"].ToString());
             var Data = jsonObj.First.First["data"].ToString();
 
-
-
             return new ReceivedPacket
             {
-                metadata = new TransmitPacketMetadata
+                metadata = new RecievedPacketMetadata
                 {
                     Timestamp = int.Parse(jsonObj.First.First["tmst"].ToString()),
                     Frequency = double.Parse(jsonObj.First.First["freq"].ToString()),

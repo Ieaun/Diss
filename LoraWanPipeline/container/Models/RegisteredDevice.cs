@@ -2,7 +2,7 @@
 {
     public class RegisteredDevice
     {
-        public byte[] NetworkSessionKey { get; set; }
+        public int Id { get; set; }
 
         public string DeviceAddress { get; set; }
     }

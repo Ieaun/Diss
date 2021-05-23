@@ -6,6 +6,6 @@
 
     public interface IQueue
     {
-       void OnHandleNotification(QueueTypes.Queues.Uplink packet);
+       void OnHandleNotification(QueueTypes.Queues.Uplinks.Uplink packet);
     }
 }

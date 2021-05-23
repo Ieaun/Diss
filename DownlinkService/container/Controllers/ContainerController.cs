@@ -21,7 +21,7 @@
         }
 
         [HttpPost]
-        [Route("/Create/")]
+        [Route("Downlink/Create/")]
         public async Task<ActionResult> Create(StubObject packet)
         {
             try
@@ -37,6 +37,7 @@
         }
 
         [HttpGet]
+        [Route("Downlink/Get/")]
         public async Task<ActionResult<StubObject>> Get(int id)
         {
             var foundObject = await _database.Get(id);
@@ -45,7 +46,7 @@
 
         
         [HttpGet]
-        [Route("/GetAll")]
+        [Route("Downlink/GetAll")]
         public async Task<ActionResult<List<StubObject>>> GetAll()
         {
             var stubObjectsList = await _database.GetAll();
@@ -53,7 +54,7 @@
         }
 
         [HttpPost]
-        [Route("/Update/")]
+        [Route("Downlink/Update/")]
         public async Task<ActionResult> Update(StubObject packet)
         {
             try
@@ -69,7 +70,7 @@
         }
 
         [HttpPost]
-        [Route("/Delete/")]
+        [Route("Downlink/Delete/")]
         public async Task<ActionResult> Delete(StubObject packet)
         {
             try

@@ -8,10 +8,10 @@
     {
         public string PacketType { get; set; }
 
-        public GatewayStatusUpdate Status { get; set; }
+        public GatewayStatusUpdate StatPacket { get; set; }
 
-        public TransmitPacket Downlink { get; set; }
+        public TransmitPacket TxPacket { get; set; }
 
-        public ReceivedPacket Uplink { get; set; }
+        public ReceivedPacket RxPacket { get; set; }
     }
 }

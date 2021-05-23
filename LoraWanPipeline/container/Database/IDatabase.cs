@@ -9,10 +9,12 @@
 
         Task<RegisteredDevice> Get(string DeviceAddress);
 
+        Task<RegisteredDevice> Get(int Id);
+
         Task<List<RegisteredDevice>> GetAll();
 
         Task Update(RegisteredDevice registeredDevice);
 
-        Task Delete(RegisteredDevice registeredDevice);
+        Task Delete(int Id);
     }
 }

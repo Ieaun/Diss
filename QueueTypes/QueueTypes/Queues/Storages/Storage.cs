@@ -1,4 +1,4 @@
-﻿namespace QueueTypes.Queues
+﻿namespace QueueTypes.Queues.Storages
 {
     using EasyNetQ;
     using QueueTypes.Models;

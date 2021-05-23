@@ -2,18 +2,18 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using UplinkService;
+    using UplinkService.Models.Servers;
 
     public interface IDatabase
     {
-        Task Create(StubObject stubObject);
+        Task Create(Server Server);
 
-        Task<StubObject> Get(int Id);
+        Task<Server> Get(int Id);
 
-        Task<List<StubObject>> GetAll();
+        Task<List<Server>> GetAll();
 
-        Task Update(StubObject stubObject);
+        Task Update(Server stubObject);
 
-        Task Delete(StubObject stubObject);
+        Task Delete(Server stubObject);
     }
 }

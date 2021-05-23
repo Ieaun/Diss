@@ -51,6 +51,13 @@
                 {
                     case "stat":
                         var gatewayStatus = _gatewayStatusMapper.Map(jsonObj);
+                        await this._queue.EnqueueToUplink(new NewPacket
+                        {
+                            PacketType = "stat",
+                            StatPacket = new GatewayStatusUpdate { 
+                                OriginalMessage = sanitizedData
+                            }
+                        });
                         break;
                     case "txpk":
                         var transmitPacket = _transmitPacketMapper.Map(jsonObj);
@@ -68,10 +75,11 @@
                             
                             await this._queue.EnqueueToUplink(new NewPacket
                             {
-                                PacketType = "Uplink",
-                                Uplink = new ReceivedPacket
+                                PacketType = "rxpk",
+                                RxPacket = new ReceivedPacket
                                 {
-                                    isRegesteredDevice = isRegesteredDevice, //need original message 
+                                    isRegesteredDevice = isRegesteredDevice,
+                                    metadata = receivePacket
                                 }
                             });
                         }

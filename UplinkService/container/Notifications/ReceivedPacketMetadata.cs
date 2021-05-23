@@ -1,14 +1,14 @@
-﻿namespace QueueTypes.Models
+﻿namespace UplinkService.Notifications
 {
     using Newtonsoft.Json;
 
-    public class ReceivedPacketMetadata : ISemtechUdpPacket
+    public class ReceivedPacketMetadata 
     {
         // Descriptions taken from: https://github.com/Lora-net/packet_forwarder/blob/master/PROTOCOL.TXT
 
         // e.g. 238504441
         [JsonProperty("tmst")]
-        public int Timestamp { get; set; }
+        public double Timestamp { get; set; }
 
         // e.g. 868.1
         // RX central frequency in MHz (unsigned float, Hz precision)
@@ -64,9 +64,5 @@
         // Base64 encoded RF packet payload, padded
         [JsonProperty("data")]
         public string Data { get; set; }
-
-        public DecodedLoraPacket DecodedPacket { get; set; }
-
-        public bool isRegesteredDevice { get; set; }
     }
 }
