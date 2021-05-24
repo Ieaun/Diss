@@ -1,8 +1,6 @@
 ﻿namespace UplinkService.Notifications
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Net;
     using System.Text.Json;
     using System.Threading;
@@ -81,7 +79,7 @@
                 }
 
                 // send to the things network
-                if ( !notification.isRegisteredDevice || notification.PacketType == "stat") {
+                if ( notification.isRegisteredDevice || notification.PacketType == "stat" || _OnlySendToTtn) {
                     _UdpHandler.Send(_TtnIP, _TtnPort, byteMessage);
                 }                
                 

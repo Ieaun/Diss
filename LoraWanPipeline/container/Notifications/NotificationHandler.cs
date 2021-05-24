@@ -43,8 +43,8 @@
                 var sanitizedData = data.Remove(0, data.IndexOf('{'));
                 var messageType = sanitizedData.Substring(2, 4);
                 var message = sanitizedData.Substring(5);
-                byte[] gatewayEUI = new byte[7];
-                Array.Copy(notification.datagram.Data, 4, gatewayEUI, 0, 7);
+                byte[] gatewayEUI = new byte[8];
+                Array.Copy(notification.datagram.Data, 4, gatewayEUI, 0, 8);
                 var semtechHeader = new SemtechUplinkHeaderMetaData {
                     ProtocolVersion = notification.datagram.Data[0],
                     Token = new byte[]{ notification.datagram.Data[1], notification.datagram.Data[2] },
