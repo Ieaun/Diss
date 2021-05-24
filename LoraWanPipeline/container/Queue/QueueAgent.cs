@@ -63,7 +63,7 @@
                 uplinkPacket = new QueueTypes.Queues.Uplinks.Uplink
                 {
                     PacketType = "rxpk",
-                    isRegesteredDevice = packet.RxPacket.isRegesteredDevice,
+                    isRegistered = packet.RxPacket.isRegesteredDevice,
                     RxPacket = new QueueTypes.Models.ReceivedPackets.ReceivedPacket
                     {
                         metadata = new QueueTypes.Models.ReceivedPackets.ReceivedPacketsMetadata {
@@ -130,7 +130,7 @@
                         Timestamp = receivedPacket.RxPacket.metadata.Timestamp,
                         Data = receivedPacket.RxPacket.metadata.Data
                     },
-                    isRegesteredDevice = receivedPacket.RxPacket.isRegesteredDevice,
+                    isRegistered = receivedPacket.RxPacket.isRegesteredDevice,
                     decodedPacket = new QueueTypes.Models.DecodedLoraPacket {
                         PhysicalPayload = new QueueTypes.Models.LoRaWanPacketSections.PhysicalPayload
                         {

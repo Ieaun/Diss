@@ -27,16 +27,18 @@
             await collection.InsertOneAsync(packet);
 
         }
-        public async Task<NewPacket> Get(int id)
+
+        public async Task<NewPacket> Get(string deviceAddress)
         {
-            _logger.LogDebug("Get request, id: {@Id}", id);
+            _logger.LogDebug("Get request, deviceAddress: {@deviceAddress}", deviceAddress);
             var collection = GetNewPacketCollection();
 
-            var filter = Builders<NewPacket>.Filter.Where(x=> x.Id == id);
+            var filter = Builders<NewPacket>.Filter.Where(x => x.Uplink.decodedPacket.PhysicalPayload.MacPayload.FrameHeader.DeviceAddress == deviceAddress);
 
-            var stubObject = collection.Find(filter).FirstOrDefault();
-            return stubObject;
+            var foundPacket = collection.Find(filter).FirstOrDefault();
+            return foundPacket;
         }
+
 
         public async Task<List<NewPacket>> GetAll()
         {
@@ -50,15 +52,8 @@
         {
             _logger.LogDebug("Delete request, deleting: {@NewPacket}", packet);
             var collection = GetNewPacketCollection();
-            var filter = Builders<NewPacket>.Filter.Eq("Id", packet.Id);
+            var filter = Builders<NewPacket>.Filter.Eq("ReceivedPacket", packet.Uplink);
             await collection.DeleteOneAsync(filter);
-        }
-
-        public async Task Update(NewPacket packet)
-        {
-            _logger.LogDebug("Update request, update: {@NewPacket}", packet);
-            var collection = GetNewPacketCollection();
-            await collection.ReplaceOneAsync(doc => doc.Id == packet.Id, packet);
         }
     }
 }

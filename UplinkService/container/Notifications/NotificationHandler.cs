@@ -58,7 +58,7 @@
                 var serializedPacket = string.IsNullOrWhiteSpace(notification.OriginalPacket) ? SerializePacket(notification) : notification.OriginalPacket;  
                 
                 // send to private server(s)
-                if ((notification.isRegesteredDevice || notification.PacketType == "stat") && !_OnlySendToTtn)
+                if ((notification.isRegisteredDevice || notification.PacketType == "stat") && !_OnlySendToTtn)
                 {
                     if (_SendToAllServers)
                     {
@@ -72,7 +72,7 @@
                 }
 
                 // send to the things network
-                if ( !notification.isRegesteredDevice || notification.PacketType == "stat") {
+                if ( !notification.isRegisteredDevice || notification.PacketType == "stat") {
                     _UdpHandler.Send(_TtnIP, _TtnPort, JsonSerializer.SerializeToUtf8Bytes(serializedPacket));
                 }                
                 

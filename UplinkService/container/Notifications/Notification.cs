@@ -5,7 +5,7 @@
     {
         public string PacketType { get; set; }
 
-        public bool isRegesteredDevice { get; set; }
+        public bool isRegisteredDevice { get; set; }
 
         public ReceivedPacketMetadata RxMetadata { get; set; }
 

@@ -35,7 +35,7 @@
             {
                 await this._queue.EnqueueToStorage( new NewPacket 
                 { 
-                    PacketType = "Uplink",
+                    PacketType = "rxpk",
                     RxPacket = new ReceivedPacket { 
                         decodedPacket = decodedMessage,
                         isRegesteredDevice = true,

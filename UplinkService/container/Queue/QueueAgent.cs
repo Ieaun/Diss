@@ -37,7 +37,7 @@
                     _mediator.Publish(new Notification
                     {
                         PacketType = packet.PacketType,
-                        isRegesteredDevice = packet.isRegesteredDevice,
+                        isRegisteredDevice = packet.isRegistered,
                         RxMetadata = new ReceivedPacketMetadata
                         {
                             Channel = packet.RxPacket.metadata.Channel,

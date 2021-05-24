@@ -7,7 +7,7 @@
     [Queue("Uplink", ExchangeName = "LoRaWAN Exchange")]
     public class Uplink
     {
-        public bool isRegesteredDevice { get; set; }
+        public bool isRegistered { get; set; }
 
         public ReceivedPacket RxPacket { get; set; }
 

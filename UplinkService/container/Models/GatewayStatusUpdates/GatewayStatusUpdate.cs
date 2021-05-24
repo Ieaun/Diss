@@ -1,10 +1,9 @@
-﻿namespace StorageService.Notifications.GatewayStatusUpdates
+﻿namespace UplinkService.Models.GatewayStatusUpdates
 {
-    using StorageService.ReceivedPacketNotifications;
 
     public class GatewayStatusUpdate : ISemtechUdpPacket
     {
-        public GatewayStatusUpdate metadata { get; set; }
+        public GatewayStatusUpdateMetadata metadata { get; set; }
 
         public string OriginalMessage { get; set; }
 

@@ -1,13 +1,12 @@
 ﻿namespace StorageService.Notifications.ReceivedPackets
 {
+    using MongoDB.Bson.Serialization.Attributes;
     using StorageService.Notifications.GatewayStatusUpdates;
     using StorageService.Notifications.TransmitPackets;
-    using MediatR;
 
+    [BsonIgnoreExtraElements]
     public class NewPacket
     {
-        public int Id { get; set; }
-
         public string PacketType { get; set; }
 
         public GatewayStatusUpdate Status { get; set; }

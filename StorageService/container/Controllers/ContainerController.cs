@@ -39,9 +39,9 @@
 
         [HttpGet]
         [Route("Storage/Get/")]
-        public async Task<ActionResult<NewPacket>> Get(int id)
+        public async Task<ActionResult<NewPacket>> Get(string deviceAddress)
         {
-            var foundObject = await _database.Get(id);
+            var foundObject = await _database.Get(deviceAddress);
             return foundObject == null ? NotFound(): Ok(foundObject);
         }
 
@@ -50,24 +50,8 @@
         [Route("Storage/GetAll")]
         public async Task<ActionResult<List<NewPacket>>> GetAll()
         {
-            var stubObjectsList = await _database.GetAll();
-            return stubObjectsList.Count == 0 ? NotFound() : Ok(stubObjectsList);
-        }
-
-        [HttpPost]
-        [Route("Storage/Update/")]
-        public async Task<ActionResult> Update(NewPacket packet)
-        {
-            try
-            {
-                await _database.Update(packet);
-                return Ok();
-            }
-            catch (Exception e)
-            {
-                _logger.LogError("Failed to update object {@Object} with error {@Exception}", packet, e.Message);
-                return Conflict();
-            }
+            var packetsList = await _database.GetAll();
+            return packetsList.Count == 0 ? NotFound() : Ok(packetsList);
         }
 
         [HttpPost]

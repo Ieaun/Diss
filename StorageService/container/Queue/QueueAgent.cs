@@ -50,8 +50,48 @@
         {
             return new NewPacket
             {
-                
-              
+                PacketType = "rxpk",
+                Uplink = new ReceivedPacket
+                {
+                    metadata = new RecievedPacketMetadata
+                    {
+                        Channel = packet.Packet.Uplink.metadata.Channel,
+                        CodingRate = packet.Packet.Uplink.metadata.CodingRate,
+                        DataRate = packet.Packet.Uplink.metadata.DataRate,
+                        Frequency = packet.Packet.Uplink.metadata.Frequency,
+                        LuminanceSignalToRatio = packet.Packet.Uplink.metadata.LuminanceSignalToRatio,
+                        Modulation = packet.Packet.Uplink.metadata.Modulation,
+                        RadioFrequencyChannel = packet.Packet.Uplink.metadata.RadioFrequencyChannel,
+                        RecievedSignalStrenghtIndicator = packet.Packet.Uplink.metadata.RecievedSignalStrenghtIndicator,
+                        Size = packet.Packet.Uplink.metadata.Size,
+                        Stat = packet.Packet.Uplink.metadata.Stat,
+                        Timestamp = packet.Packet.Uplink.metadata.Timestamp,
+                        Data = packet.Packet.Uplink.metadata.Data
+                    },
+                    isRegistered = packet.Packet.Uplink.isRegistered,
+                    decodedPacket = new DecodedLoraPacket
+                    {
+                        PhysicalPayload = new PhysicalPayload
+                        {
+                            MacHeader = packet.Packet.Uplink.decodedPacket.PhysicalPayload.MacHeader,
+                            MIC = packet.Packet.Uplink.decodedPacket.PhysicalPayload.MIC,
+                            MacPayload = new MacPayload
+                            {
+                                FramePort = packet.Packet.Uplink.decodedPacket.PhysicalPayload.MacPayload.FramePort,
+                                FramePayload = packet.Packet.Uplink.decodedPacket.PhysicalPayload.MacPayload.FramePayload,
+                                FrameHeader = new FrameHeader
+                                {
+                                    DeviceAddress = packet.Packet.Uplink.decodedPacket.PhysicalPayload.MacPayload.FrameHeader.DeviceAddress,
+                                    FrameControlOctet = packet.Packet.Uplink.decodedPacket.PhysicalPayload.MacPayload.FrameHeader.FrameControlOctet,
+                                    FrameCounter = packet.Packet.Uplink.decodedPacket.PhysicalPayload.MacPayload.FrameHeader.FrameCounter,
+                                    FrameOptions = packet.Packet.Uplink.decodedPacket.PhysicalPayload.MacPayload.FrameHeader.FrameOptions
+                                }
+                            }
+                        },
+                        OriginalHexString = packet.Packet.Uplink.decodedPacket.OriginalHexString
+                    },
+                    OriginalMessage = packet.Packet.Uplink.OriginalMessage
+                }
             };
         }
     }

@@ -22,7 +22,7 @@
             _logger.LogInformation("Received new notification :{@Notification}", notification);
             try
             {
-                //_database.Create();
+                _database.Create(notification.Packet);
             }
             catch (Exception e)
             {

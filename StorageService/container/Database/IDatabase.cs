@@ -2,19 +2,16 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using StorageService;
     using StorageService.Notifications.ReceivedPackets;
 
     public interface IDatabase
     {
-        Task Create(NewPacket stubObject);
+        Task Create(NewPacket packet);
 
-        Task<NewPacket> Get(int Id);
+        Task<NewPacket> Get(string deviceAddress);
 
         Task<List<NewPacket>> GetAll();
 
-        Task Update(NewPacket stubObject);
-
-        Task Delete(NewPacket stubObject);
+        Task Delete(NewPacket packet);
     }
 }

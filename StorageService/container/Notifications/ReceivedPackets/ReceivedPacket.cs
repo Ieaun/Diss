@@ -8,7 +8,7 @@
 
         public DecodedLoraPacket decodedPacket { get; set; }
 
-        public bool isRegesteredDevice { get; set; }
+        public bool isRegistered { get; set; }
 
         public byte[] OriginalMessage { get; set; }
 
