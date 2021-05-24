@@ -6,7 +6,11 @@
     {
         public RecievedPacketMetadata metadata { get; set; }
 
+        public SemtechUplinkHeaderMetaData semtechHeader { get; set; }
+
         public DecodedLoraPacket decodedPacket { get; set; }
+
+        public string OriginalMessage { get; set; }
 
         public bool isRegesteredDevice { get; set; }
 

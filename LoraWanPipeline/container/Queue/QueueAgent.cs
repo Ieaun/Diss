@@ -80,7 +80,8 @@
                             RadioFrequencyChannel = packet.RxPacket.metadata.RadioFrequencyChannel,
                             Stat = packet.RxPacket.metadata.Stat
                         }               
-                    }
+                    },
+                    UnalteredPacket = packet.UnalteredPacket                   
                 };
             }
 
@@ -92,7 +93,8 @@
                     GsPacket = new QueueTypes.Models.GatewayStatusUpdates.GatewayStatusUpdate
                     {
                         OriginalMessage = packet.StatPacket.OriginalMessage
-                    }
+                    },
+                    UnalteredPacket = packet.UnalteredPacket
                 };
             }
 

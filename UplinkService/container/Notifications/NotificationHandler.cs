@@ -55,25 +55,34 @@
             _Logger.LogInformation("Recieved new notification :{@Notification}", notification);
             try
             {
-                var serializedPacket = string.IsNullOrWhiteSpace(notification.OriginalPacket) ? SerializePacket(notification) : notification.OriginalPacket;  
-                
+                var unalteredPacketPresent = notification.UnalteredPacket != null;
+                var serializedPacket = string.IsNullOrWhiteSpace(notification.OriginalMessage) && !unalteredPacketPresent ? SerializePacket(notification) : notification.OriginalMessage;
+                var byteMessage = !unalteredPacketPresent ? JsonSerializer.SerializeToUtf8Bytes(serializedPacket) : notification.UnalteredPacket;
+
                 // send to private server(s)
                 if ((notification.isRegisteredDevice || notification.PacketType == "stat") && !_OnlySendToTtn)
                 {
-                    if (_SendToAllServers)
+                    try
                     {
-                        var servers = await _Database.GetAll();
-                        servers.ForEach(x => _UdpHandler.Send(x.IpAddress, x.Port, JsonSerializer.SerializeToUtf8Bytes(serializedPacket)));
+                        if (_SendToAllServers)
+                        {
+                            var servers = await _Database.GetAll();
+                            servers.ForEach(x => _UdpHandler.Send(x.IpAddress, x.Port, byteMessage));
+                        }
+                        else
+                        {
+                            _UdpHandler.Send(_PriorityServerIP, _PriorityServerPort, byteMessage);
+                        }
                     }
-                    else
+                    catch (Exception e)
                     {
-                        _UdpHandler.Send(_PriorityServerIP, _PriorityServerPort, JsonSerializer.SerializeToUtf8Bytes(serializedPacket));
+                        _Logger.LogInformation("Failed sending packet to private server :{@Notification} with exception: {@Exception}", notification, e.Message);
                     }
                 }
 
                 // send to the things network
                 if ( !notification.isRegisteredDevice || notification.PacketType == "stat") {
-                    _UdpHandler.Send(_TtnIP, _TtnPort, JsonSerializer.SerializeToUtf8Bytes(serializedPacket));
+                    _UdpHandler.Send(_TtnIP, _TtnPort, byteMessage);
                 }                
                 
             }

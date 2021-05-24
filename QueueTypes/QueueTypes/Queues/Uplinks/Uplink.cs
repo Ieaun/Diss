@@ -13,6 +13,8 @@
 
         public GatewayStatusUpdate GsPacket { get; set; }
 
-        public string PacketType { get; set; } 
+        public string PacketType { get; set; }
+
+        public byte[] UnalteredPacket { get; set; }
     }
 }

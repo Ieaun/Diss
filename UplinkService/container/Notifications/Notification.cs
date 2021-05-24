@@ -11,6 +11,8 @@
 
         public GatewayStatusUpdateMetadata GsMetadata { get; set; }
 
-        public string OriginalPacket { get; set; }
-}
+        public string OriginalMessage { get; set; }
+
+        public byte[] UnalteredPacket { get; set; }
+    }
 }

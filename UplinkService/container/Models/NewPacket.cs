@@ -10,5 +10,7 @@
         public GatewayStatusUpdate Status { get; set; }
 
         public ReceivedPacket Uplink { get; set; }
+
+        public byte[] UnalteredPacket { get; set; }
     }
 }

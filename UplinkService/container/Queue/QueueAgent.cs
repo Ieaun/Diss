@@ -52,7 +52,9 @@
                             RecievedSignalStrenghtIndicator = packet.RxPacket.metadata.RecievedSignalStrenghtIndicator,
                             RadioFrequencyChannel = packet.RxPacket.metadata.RadioFrequencyChannel,
                             Stat = packet.RxPacket.metadata.Stat
-                        }
+                        },
+                        OriginalMessage = packet.RxPacket.OriginalMessage,
+                        UnalteredPacket = packet.UnalteredPacket
                     });
                 }
 
@@ -76,7 +78,8 @@
                             Time = packet.GsPacket.metadata.Time,
                             Txnb = packet.GsPacket.metadata.Txnb
                         }: null,
-                        OriginalPacket = packet.GsPacket.OriginalMessage
+                        OriginalMessage = packet.GsPacket.OriginalMessage,
+                        UnalteredPacket = packet.UnalteredPacket
                     });
                 }
 

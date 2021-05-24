@@ -13,5 +13,7 @@
         public TransmitPacket TxPacket { get; set; }
 
         public ReceivedPacket RxPacket { get; set; }
+
+        public byte[] UnalteredPacket { get; set; }
     }
 }

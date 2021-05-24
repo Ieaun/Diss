@@ -13,5 +13,7 @@
         public TransmitPacket Downlink { get; set; }
 
         public ReceivedPacket Uplink { get; set; }
+
+        public byte[] UnalteredPacket { get; set; }
     }
 }

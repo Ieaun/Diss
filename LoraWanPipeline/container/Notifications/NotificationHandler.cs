@@ -43,6 +43,14 @@
                 var sanitizedData = data.Remove(0, data.IndexOf('{'));
                 var messageType = sanitizedData.Substring(2, 4);
                 var message = sanitizedData.Substring(5);
+                byte[] gatewayEUI = new byte[7];
+                Array.Copy(notification.datagram.Data, 4, gatewayEUI, 0, 7);
+                var semtechHeader = new SemtechUplinkHeaderMetaData {
+                    ProtocolVersion = notification.datagram.Data[0],
+                    Token = new byte[]{ notification.datagram.Data[1], notification.datagram.Data[2] },
+                    PushType = notification.datagram.Data[3],
+                    GatewayEUI = gatewayEUI
+                };
         
                 var jsonObj = JObject.Parse(sanitizedData);
 
@@ -55,8 +63,10 @@
                         {
                             PacketType = "stat",
                             StatPacket = new GatewayStatusUpdate { 
-                                OriginalMessage = sanitizedData
-                            }
+                                OriginalMessage = sanitizedData,
+                                semtechHeader = semtechHeader
+                            },
+                            UnalteredPacket = notification.datagram.Data
                         });
                         break;
                     case "txpk":
@@ -79,8 +89,11 @@
                                 RxPacket = new ReceivedPacket
                                 {
                                     isRegesteredDevice = isRegesteredDevice,
-                                    metadata = receivePacket
-                                }
+                                    metadata = receivePacket,
+                                    OriginalMessage = sanitizedData,
+                                    semtechHeader = semtechHeader
+                                },
+                                UnalteredPacket = notification.datagram.Data
                             });
                         }
 
