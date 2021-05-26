@@ -18,10 +18,10 @@
         public void Start()
         {
             _logger.LogInformation("Starting Udp Handler");
-            _endpoint = new UdpEndpoint("127.0.0.1", 30098);
+            _endpoint = new UdpEndpoint("192.168.8.100", 30098);
             _endpoint.EndpointDetected += EndpointDetected;
 
-            // only if you want to receive messages...
+           
             _endpoint.DatagramReceived += DatagramReceived;
             _endpoint.StartServer();
         }

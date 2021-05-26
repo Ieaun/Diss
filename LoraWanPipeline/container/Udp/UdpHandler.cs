@@ -60,7 +60,7 @@
 
         public async void DatagramReceived(object sender, Datagram dg)
         {
-            _logger.LogInformation("[" + dg.Ip + ":" + dg.Port + "]: " + Encoding.UTF8.GetString(dg.Data));
+            _logger.LogInformation("Received datagram from [" + dg.Ip + ":" + dg.Port + "]: " + Encoding.UTF8.GetString(dg.Data));
 
             await _mediator.Publish(new Notification {
                 datagram = dg

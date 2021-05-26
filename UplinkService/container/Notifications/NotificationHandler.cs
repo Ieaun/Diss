@@ -79,7 +79,7 @@
                 }
 
                 // send to the things network
-                if ( notification.isRegisteredDevice || notification.PacketType == "stat" || _OnlySendToTtn) {
+                if ( !notification.isRegisteredDevice || notification.PacketType == "stat" || _OnlySendToTtn) {
                     _UdpHandler.Send(_TtnIP, _TtnPort, byteMessage);
                 }                
                 

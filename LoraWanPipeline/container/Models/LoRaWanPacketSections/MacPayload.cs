@@ -4,7 +4,7 @@
     {
         public FrameHeader FrameHeader { get; set; }
 
-        // this is encrypted, no use unless you know the keys
+        // this is encrypted, cant use unless you know the keys
         public string FramePayload { get; set; }
 
         // optional
